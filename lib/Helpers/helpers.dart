@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:onepad/Helpers/colorhelper.dart';
 
-
 class Helper {
   int radius = 10;
   int maxradius = 40;
@@ -40,7 +39,7 @@ class Helper {
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(radius.toDouble()),
           gradient: LinearGradient(
-              colors: [Colors.teal, Colors.teal.withOpacity(0.5)])),
+              colors: [Colors.orange, Colors.purple.withOpacity(0.5)])),
     );
   }
 }
