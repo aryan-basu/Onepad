@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
+// ignore: import_of_legacy_library_into_null_safe
+import 'package:splashscreen/splashscreen.dart';
 
-
-class SplashScreen extends StatefulWidget {
-  const SplashScreen({Key? key}) : super(key: key);
-
+class MyApp extends StatefulWidget {
   @override
-  _SplashScreenState createState() => _SplashScreenState();
+  _MyAppState createState() => new _MyAppState();
 }
 
-class _SplashScreenState extends State<SplashScreen> {
+class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-backgroundColor: Colors.black,
-
-    );
+    return new SplashScreen(
+        seconds: 5,
+        image: new Image.asset('assets/images/splashscreen.gif'),
+        backgroundColor: Colors.black,
+        photoSize: 100.0);
   }
 }
