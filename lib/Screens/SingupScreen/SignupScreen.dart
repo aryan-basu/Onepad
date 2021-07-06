@@ -129,11 +129,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             ),
                             suffixIcon: IconButton(
                               icon: Icon(
-                                  _passwordvisible
-                                      ? Icons.visibility
-                                      : Icons.visibility_off,
-                                  color: darkcolor,
-                                  size: 20,),
+                                _passwordvisible
+                                    ? Icons.visibility
+                                    : Icons.visibility_off,
+                                color: darkcolor,
+                                size: 20,
+                              ),
                               onPressed: () {
                                 setState(() {
                                   _passwordvisible = !_passwordvisible;
@@ -172,11 +173,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             ),
                             suffixIcon: IconButton(
                               icon: Icon(
-                                  _confirmpassvisible
-                                      ? Icons.visibility
-                                      : Icons.visibility_off,
-                                  color: darkcolor,
-                                  size: 20,),
+                                _confirmpassvisible
+                                    ? Icons.visibility
+                                    : Icons.visibility_off,
+                                color: darkcolor,
+                                size: 20,
+                              ),
                               onPressed: () {
                                 setState(() {
                                   _confirmpassvisible = !_confirmpassvisible;
