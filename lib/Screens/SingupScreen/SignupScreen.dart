@@ -99,7 +99,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       children: [
                         Container(
                           decoration: BoxDecoration(
-                              color: lightcolor.withOpacity(0.5),
+                              color: lightcolor.withOpacity(0.2),
                               borderRadius: BorderRadius.circular(40)),
                           child: TextFormField(
                             controller: namecontroller,
@@ -131,7 +131,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         ),
                         Container(
                           decoration: BoxDecoration(
-                              color: lightcolor.withOpacity(0.5),
+                              color: lightcolor.withOpacity(0.2),
                               borderRadius: BorderRadius.circular(40)),
                           child: TextFormField(
                             validator: (val) {
@@ -165,7 +165,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         ),
                         Container(
                           decoration: BoxDecoration(
-                              color: lightcolor.withOpacity(0.5),
+                              color: lightcolor.withOpacity(0.2),
                               borderRadius: BorderRadius.circular(40)),
                           child: TextFormField(
                             controller: passwordcontroller,
