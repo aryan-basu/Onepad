@@ -83,10 +83,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
         child: SingleChildScrollView(
           child: Container(
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Container(
                   height: MediaQuery.of(context).size.height / 2,
+                  width: MediaQuery.of(context).size.width - 100,
                   decoration: BoxDecoration(
                       image: DecorationImage(
                           image: AssetImage('assets/images/signup.jpg'))),

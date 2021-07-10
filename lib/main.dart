@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:onepad/Screens/GetStarted.dart';
 import 'package:onepad/Screens/SingupScreen/SignupScreen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:onepad/Services/const.dart';
