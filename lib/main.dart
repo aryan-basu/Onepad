@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:onepad/Screens/SingupScreen/SignupScreen.dart';
-import 'package:onepad/Screens/SplashScreen/SplashScreen.dart';
-// import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:onepad/Services/const.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-Future<void> main() async {
-  // WidgetsFlutterBinding.ensureInitialized();
-  // await Firebase.initializeApp();
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  Onepad.sharedPreferences = await SharedPreferences.getInstance();
   runApp(MyApp());
 }
 
