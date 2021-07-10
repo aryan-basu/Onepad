@@ -1,221 +1,243 @@
-import 'dart:ui';
-
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:onepad/Helpers/colorhelper.dart';
 import 'package:onepad/Helpers/helpers.dart';
+import 'package:onepad/Screens/HomeScreen/homescreen.dart';
 import 'package:onepad/Screens/SignInScreen/SignInScreen.dart';
+import 'package:onepad/Services/const.dart';
 
 class SignUpScreen extends StatefulWidget {
-  const SignUpScreen({Key? key}) : super(key: key);
+  const SignUpScreen({Key key}) : super(key: key);
 
   @override
   _SignUpScreenState createState() => _SignUpScreenState();
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
-  bool _passwordvisible = false;
-  bool _confirmpassvisible = false;
-  String email = '';
-  String username = '';
-  String confirmpassword = '';
-  String password = '';
+  TextEditingController passwordcontroller = new TextEditingController();
+  TextEditingController emailcontroller = new TextEditingController();
+  TextEditingController usernamecontroller = new TextEditingController();
+  FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+  FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
+  bool passwordvisibility = false;
+  bool isloading = false;
+  final _formKey = GlobalKey<FormState>();
 
-  void _signup() async {}
+  Future<void> _signup() async {
+    if (_formKey.currentState.validate()) {
+      setState(() {
+        isloading = true;
+      });
+      User firebaseUser;
+
+      await _firebaseAuth
+          .createUserWithEmailAndPassword(
+              email: emailcontroller.text.trim(),
+              password: passwordcontroller.text.trim())
+          .then((auth) {
+        firebaseUser = auth.user;
+      }).catchError((error) {
+        Navigator.pop(context);
+        showDialog(
+            context: context,
+            builder: (c) {
+              // return AlertErrorDialog(message: error.message.toString());
+            });
+      });
+      if (firebaseUser != null) {
+        uploaddata(firebaseUser).then((value) {
+          Route route = MaterialPageRoute(builder: (c) => HomeScreen());
+          Navigator.pushReplacement(context, route);
+        });
+      }
+    }
+  }
+
+  uploaddata(User user) async {
+    FirebaseFirestore.instance.collection('Users').doc(user.uid).set({
+      "uid": user.uid,
+      "email": user.email,
+      "username": usernamecontroller.text.trim(),
+    });
+    Onepad.sharedPreferences.setString("uid", user.uid);
+    Onepad.sharedPreferences.setString("email", user.email);
+    Onepad.sharedPreferences
+        .setString("username", usernamecontroller.text.trim())
+        .then((value) {
+      print('Firebase set properly');
+      print(user.uid);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        resizeToAvoidBottomInset: true,
-        body: Container(
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                  image: AssetImage(
-                    'assets/images/bg.jfif',
-                  ),
-                  fit: BoxFit.cover),
-            ),
-            child: BackdropFilter(
-              filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
-              child: Padding(
-                padding: const EdgeInsets.all(15.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
+      backgroundColor: background,
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Container(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  height: MediaQuery.of(context).size.height / 1.8,
+                  decoration: BoxDecoration(
+                      image: DecorationImage(
+                          image: NetworkImage(
+                              'https://image.flaticon.com/icons/png/128/4508/4508684.png'))),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(40.0),
+                  child: Form(
+                    key: _formKey,
+                    child: Column(
                       children: [
-                        Helper.text('Welcome Champ', 35, 1, darktextcolor),
+                        Container(
+                          decoration: BoxDecoration(
+                              color: lightcolor.withOpacity(0.5),
+                              borderRadius: BorderRadius.circular(40)),
+                          child: TextFormField(
+                            validator: (val) {
+                              return val.length < 4
+                                  ? 'Provide a valid username'
+                                  : null;
+                            },
+                            decoration: InputDecoration(
+                              prefixIcon: Icon(
+                                Icons.person,
+                                size: 15,
+                                color: darkcolor,
+                              ),
+                              hintText: 'Username',
+                              hintStyle:
+                                  GoogleFonts.ubuntu(color: darktextcolor),
+                              enabledBorder: OutlineInputBorder(
+                                  borderSide:
+                                      BorderSide(color: Colors.transparent)),
+                              focusedBorder: OutlineInputBorder(
+                                  borderSide:
+                                      BorderSide(color: Colors.transparent)),
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        Container(
+                          decoration: BoxDecoration(
+                              color: lightcolor.withOpacity(0.5),
+                              borderRadius: BorderRadius.circular(40)),
+                          child: TextFormField(
+                            validator: (val) {
+                              return RegExp(
+                                          r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                                      .hasMatch(val)
+                                  ? null
+                                  : "Please provide a valid email";
+                            },
+                            controller: emailcontroller,
+                            style: GoogleFonts.ubuntu(color: darktextcolor),
+                            decoration: InputDecoration(
+                                prefixIcon: Icon(
+                                  Icons.email,
+                                  color: darkcolor,
+                                  size: 15,
+                                ),
+                                hintText: 'Email',
+                                hintStyle:
+                                    GoogleFonts.ubuntu(color: darktextcolor),
+                                enabledBorder: OutlineInputBorder(
+                                    borderSide:
+                                        BorderSide(color: Colors.transparent)),
+                                focusedBorder: OutlineInputBorder(
+                                    borderSide:
+                                        BorderSide(color: Colors.transparent))),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        Container(
+                          decoration: BoxDecoration(
+                              color: lightcolor.withOpacity(0.5),
+                              borderRadius: BorderRadius.circular(40)),
+                          child: TextFormField(
+                            validator: (val) {
+                              return val.length < 4
+                                  ? 'Provide a strong password'
+                                  : null;
+                            },
+                            decoration: InputDecoration(
+                                prefixIcon: Icon(
+                                  Icons.lock,
+                                  size: 15,
+                                  color: darkcolor,
+                                ),
+                                hintText: 'Password',
+                                hintStyle:
+                                    GoogleFonts.ubuntu(color: darktextcolor),
+                                enabledBorder: OutlineInputBorder(
+                                    borderSide:
+                                        BorderSide(color: Colors.transparent)),
+                                focusedBorder: OutlineInputBorder(
+                                    borderSide:
+                                        BorderSide(color: Colors.transparent)),
+                                suffixIcon: IconButton(
+                                  onPressed: () {
+                                    setState(() {
+                                      passwordvisibility = !passwordvisibility;
+                                    });
+                                  },
+                                  icon: passwordvisibility
+                                      ? Icon(Icons.visibility)
+                                      : Icon(Icons.visibility_off),
+                                  color: darkcolor,
+                                  iconSize: 15,
+                                )),
+                            obscureText: !passwordvisibility,
+                          ),
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            _signup();
+                          },
+                          child: Container(
+                            height: 60,
+                            decoration: BoxDecoration(
+                                color: darkcolor,
+                                borderRadius: BorderRadius.circular(40)),
+                            child: Center(
+                                child: Helper.text(
+                                    'Signup', 20, 1, lighttextcolor)),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (b) => SignInScreen()));
+                          },
+                          child: Helper.text('Alreay have an account? Signin',
+                              10, 1, darkcolor),
+                        )
                       ],
                     ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Container(
-                      height: 60,
-                      decoration: BoxDecoration(
-                        color: boxcolor,
-                        borderRadius: BorderRadius.circular(40),
-                      ),
-                      child: TextFormField(
-                        onChanged: (value) {
-                          username = value;
-                        },
-                        decoration: InputDecoration(
-                            hintText: 'Username',
-                            hintStyle: GoogleFonts.ubuntu(
-                              fontSize: 15,
-                              color: darktextcolor,
-                              fontWeight: FontWeight.normal,
-                              letterSpacing: 1,
-                            ),
-                            enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: Colors.transparent),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                                borderSide:
-                                    BorderSide(color: Colors.transparent))),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Container(
-                      height: 60,
-                      decoration: BoxDecoration(
-                        color: boxcolor,
-                        borderRadius: BorderRadius.circular(40),
-                      ),
-                      child: TextFormField(
-                        onChanged: (value) {
-                          email = value;
-                        },
-                        decoration: InputDecoration(
-                            hintText: 'Email',
-                            hintStyle: GoogleFonts.ubuntu(
-                              fontSize: 15,
-                              color: darktextcolor,
-                              fontWeight: FontWeight.normal,
-                              letterSpacing: 1,
-                            ),
-                            enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: Colors.transparent),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                                borderSide:
-                                    BorderSide(color: Colors.transparent))),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Container(
-                      height: 60,
-                      decoration: BoxDecoration(
-                        color: boxcolor,
-                        borderRadius: BorderRadius.circular(40),
-                      ),
-                      child: TextFormField(
-                        onChanged: (value) {
-                          password = value;
-                        },
-                        obscureText: !_passwordvisible,
-                        decoration: InputDecoration(
-                            hintText: 'Password',
-                            hintStyle: GoogleFonts.ubuntu(
-                              fontSize: 15,
-                              color: darktextcolor,
-                              fontWeight: FontWeight.normal,
-                              letterSpacing: 1,
-                            ),
-                            suffixIcon: IconButton(
-                              icon: Icon(
-                                  _passwordvisible
-                                      ? Icons.visibility
-                                      : Icons.visibility_off,
-                                  color: darkcolor,
-                                  size: 20,),
-                              onPressed: () {
-                                setState(() {
-                                  _passwordvisible = !_passwordvisible;
-                                });
-                              },
-                            ),
-                            enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: Colors.transparent),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                                borderSide:
-                                    BorderSide(color: Colors.transparent))),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Container(
-                      height: 60,
-                      decoration: BoxDecoration(
-                        color: boxcolor,
-                        borderRadius: BorderRadius.circular(40),
-                      ),
-                      child: TextFormField(
-                        onChanged: (value) {
-                          confirmpassword = value;
-                        },
-                        obscureText: !_confirmpassvisible,
-                        decoration: InputDecoration(
-                            hintText: 'Confirm Password',
-                            hintStyle: GoogleFonts.ubuntu(
-                              fontSize: 15,
-                              color: darktextcolor,
-                              fontWeight: FontWeight.normal,
-                              letterSpacing: 1,
-                            ),
-                            suffixIcon: IconButton(
-                              icon: Icon(
-                                  _confirmpassvisible
-                                      ? Icons.visibility
-                                      : Icons.visibility_off,
-                                  color: darkcolor,
-                                  size: 20,),
-                              onPressed: () {
-                                setState(() {
-                                  _confirmpassvisible = !_confirmpassvisible;
-                                });
-                              },
-                            ),
-                            enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: Colors.transparent),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                                borderSide:
-                                    BorderSide(color: Colors.transparent))),
-                      ),
-                    ),
-                    SizedBox(height: 20.0),
-                    GestureDetector(
-                        onTap: () {
-                          _signup();
-                        },
-                        child:
-                            Center(child: Helper.button("Signup", maxradius))),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Center(
-                      child: GestureDetector(
-                        onTap: () {
-                          Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (b) => SignInScreen()));
-                        },
-                        child: Helper.text('Already have an account ? Login',
-                            10, 1, lighttextcolor),
-                      ),
-                    )
-                  ],
+                  ),
                 ),
-              ),
-            )));
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }
