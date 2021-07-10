@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:onepad/Errors/AlertDialog.dart';
 import 'package:onepad/Helpers/colorhelper.dart';
 import 'package:onepad/Helpers/helpers.dart';
 import 'package:onepad/Screens/HomeScreen/homescreen.dart';
@@ -16,26 +17,30 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
-  TextEditingController passwordcontroller = new TextEditingController();
+  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   TextEditingController emailcontroller = new TextEditingController();
-  TextEditingController usernamecontroller = new TextEditingController();
-  FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
-  FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
-  bool passwordvisibility = false;
+  TextEditingController namecontroller = new TextEditingController();
+  TextEditingController passwordcontroller = new TextEditingController();
+
   bool isloading = false;
-  final _formKey = GlobalKey<FormState>();
+  bool passwordvisibility = false;
+
+  final formKey = GlobalKey<FormState>();
 
   Future<void> _signup() async {
-    if (_formKey.currentState.validate()) {
+    if (formKey.currentState.validate()) {
       setState(() {
         isloading = true;
       });
+      print(emailcontroller.text);
+      print(passwordcontroller.text);
+      print(namecontroller.text);
       User firebaseUser;
 
       await _firebaseAuth
           .createUserWithEmailAndPassword(
-              email: emailcontroller.text.trim(),
-              password: passwordcontroller.text.trim())
+              email: emailcontroller.text.toString(),
+              password: passwordcontroller.text.toString())
           .then((auth) {
         firebaseUser = auth.user;
       }).catchError((error) {
@@ -43,7 +48,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
         showDialog(
             context: context,
             builder: (c) {
-              // return AlertErrorDialog(message: error.message.toString());
+              return AlertErrorDialog(message: error.message.toString());
             });
       });
       if (firebaseUser != null) {
@@ -59,15 +64,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
     FirebaseFirestore.instance.collection('Users').doc(user.uid).set({
       "uid": user.uid,
       "email": user.email,
-      "username": usernamecontroller.text.trim(),
+      "username": namecontroller.text.trim(),
     });
-    Onepad.sharedPreferences.setString("uid", user.uid);
-    Onepad.sharedPreferences.setString("email", user.email);
+    Onepad.sharedPreferences.setString('uid', user.uid);
+    Onepad.sharedPreferences.setString('email', user.email);
     Onepad.sharedPreferences
-        .setString("username", usernamecontroller.text.trim())
+        .setString('username', namecontroller.text.trim())
         .then((value) {
       print('Firebase set properly');
-      print(user.uid);
     });
   }
 
@@ -82,16 +86,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Container(
-                  height: MediaQuery.of(context).size.height / 1.8,
+                  height: MediaQuery.of(context).size.height / 2,
                   decoration: BoxDecoration(
                       image: DecorationImage(
-                          image: NetworkImage(
-                              'https://image.flaticon.com/icons/png/128/4508/4508684.png'))),
+                          image: AssetImage('assets/images/signup.jpg'))),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(40.0),
                   child: Form(
-                    key: _formKey,
+                    key: formKey,
                     child: Column(
                       children: [
                         Container(
@@ -99,6 +102,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               color: lightcolor.withOpacity(0.5),
                               borderRadius: BorderRadius.circular(40)),
                           child: TextFormField(
+                            controller: namecontroller,
                             validator: (val) {
                               return val.length < 4
                                   ? 'Provide a valid username'
@@ -164,6 +168,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               color: lightcolor.withOpacity(0.5),
                               borderRadius: BorderRadius.circular(40)),
                           child: TextFormField(
+                            controller: passwordcontroller,
                             validator: (val) {
                               return val.length < 4
                                   ? 'Provide a strong password'
