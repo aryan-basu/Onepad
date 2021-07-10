@@ -2,15 +2,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import 'package:onepad/Helpers/colorhelper.dart';
 import 'package:onepad/Helpers/helpers.dart';
-import 'package:onepad/HomeScreen/homeScreen.dart';
 import 'package:onepad/Screens/Errors/Alert.dart';
-
+import 'package:onepad/Screens/HomeScreen/homeScreen.dart';
 import 'package:onepad/Screens/SignInScreen/SignInScreen.dart';
 import 'package:onepad/Services/const.dart';
-
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({Key key}) : super(key: key);

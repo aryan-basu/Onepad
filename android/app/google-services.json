@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "652221197367",
+    "project_id": "onepad-31390",
+    "storage_bucket": "onepad-31390.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:652221197367:android:03e67a78397d760ee463b2",
+        "android_client_info": {
+          "package_name": "com.example.onepad"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "652221197367-jngnkk8grrh41e07ij81rihqc5b6qens.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.onepad",
+            "certificate_hash": "855a51ffe8ba979f93a56d0185c9b6586ccb21de"
+          }
+        },
+        {
+          "client_id": "652221197367-gm5r68i42hjsl20ln8u8pl24cih45a85.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA7L5bb5uGgFGeLBlAfhzP745jAn7WSh-g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "652221197367-gm5r68i42hjsl20ln8u8pl24cih45a85.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
