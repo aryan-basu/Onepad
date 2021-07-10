@@ -1,7 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:onepad/Helpers/helpers.dart';
+import 'package:onepad/Helpers/colorhelper.dart';
+import 'package:google_fonts/google_fonts.dart';
 
-class LoginPage extends StatelessWidget {
+class GetStarted extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
@@ -9,31 +12,38 @@ class LoginPage extends StatelessWidget {
       children: [
         Image.asset(
           "assets/images/icon.png",
-          fit: BoxFit.contain,
+          fit: BoxFit.scaleDown,
         ),
         SizedBox(
           height: 20,
         ),
-        Text("Welcome to Onepad",
-            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+        Helper.text("Welcome to Onepad!", 20, 20, darktextcolor),
         SizedBox(
           height: 20,
         ),
-        Text("Daily Notes"),
+        Helper.text("Daily Notes", 10, 10, darktextcolor),
         SizedBox(
-          height: 20,
+          height: 10,
         ),
-        Text(
-            "Take notes, reminders, set targets, collect resources and secure privacy"),
+        Helper.text(
+            "Take notes, reminders, set targets, collect resources and secure privacy",
+            10,
+            10,
+            darktextcolor),
         SizedBox(
-          height: 40,
+          height: 30,
         ),
         ElevatedButton(
           onPressed: () {},
-          child: Text("Get Started"),
+          child: Text(
+            "Get Started",
+            style: TextStyle(
+              fontFamily: GoogleFonts.gabriela(fontSize: 20).fontFamily,
+            ),
+          ),
           style: TextButton.styleFrom(
-              backgroundColor: Colors.yellow,
-              primary: Colors.black,
+              backgroundColor: lightcolor,
+              primary: Colors.white,
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(18))),
         )
