@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:onepad/Helpers/helpers.dart';
 import 'package:onepad/Helpers/colorhelper.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'HomePage.dart';
 
-class GetStarted extends StatelessWidget {
+class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
@@ -17,28 +18,31 @@ class GetStarted extends StatelessWidget {
         SizedBox(
           height: 20,
         ),
-        Helper.text("Welcome to Onepad!", 20, 20, darktextcolor),
+        Helper.text("Welcome to Onepad!", 14, 2, darktextcolor),
         SizedBox(
           height: 20,
         ),
-        Helper.text("Daily Notes", 10, 10, darktextcolor),
+        Helper.text("Daily Notes", 10, 2, darktextcolor),
         SizedBox(
-          height: 10,
+          height: 20,
         ),
         Helper.text(
             "Take notes, reminders, set targets, collect resources and secure privacy",
-            10,
-            10,
+            8,
+            2,
             darktextcolor),
         SizedBox(
           height: 30,
         ),
         ElevatedButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => HomePage()));
+          },
           child: Text(
             "Get Started",
             style: TextStyle(
-              fontFamily: GoogleFonts.gabriela(fontSize: 20).fontFamily,
+              fontFamily: GoogleFonts.ubuntu(fontSize: 20).fontFamily,
             ),
           ),
           style: TextButton.styleFrom(
