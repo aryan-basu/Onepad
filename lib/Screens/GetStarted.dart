@@ -1,55 +1,44 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:onepad/Screens/HomePage.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:onepad/Helpers/colorhelper.dart';
+import 'package:onepad/Helpers/helpers.dart';
+import 'package:onepad/Screens/SignInScreen/SignInScreen.dart';
+
+import 'SingupScreen/SignupScreen.dart';
 
 class GetStarted extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Material(
-        child: Column(
-      children: [
-        Image.asset(
-          "assets/images/icon.png",
-          fit: BoxFit.scaleDown,
-        ),
-        SizedBox(
-          height: 20,
-        ),
-        Helper.text("Welcome to Onepad!", 14, 2, darktextcolor),
-        SizedBox(
-          height: 20,
-        ),
-        Helper.text("Daily Notes", 10, 2, darktextcolor),
-        SizedBox(
-          height: 20,
-        ),
-        Helper.text(
-            "Take notes, reminders, set targets, collect resources and secure privacy",
-            8,
-            2,
-            darktextcolor),
-        SizedBox(
-          height: 30,
-        ),
-        ElevatedButton(
-          onPressed: () {
-            Navigator.push(
-                context, MaterialPageRoute(builder: (context) => HomePage()));
-          },
-          child: Text(
-            "Get Started",
-            style: TextStyle(
-              fontFamily: GoogleFonts.ubuntu(fontSize: 20).fontFamily,
-            ),
+    return Scaffold(
+        body: SafeArea(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Container(
+            height: MediaQuery.of(context).size.height / 3,
+            decoration: BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage("assets/images/logo.png"))),
           ),
-          style: TextButton.styleFrom(
-              backgroundColor: lightcolor,
-              primary: Colors.white,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(18))),
-        )
-      ],
+          SizedBox(
+            height: 20,
+          ),
+          Helper.text("Welcome to Onepad!", 18, 1, darktextcolor),
+          SizedBox(
+            height: 10,
+          ),
+          Helper.subtext("Read | Write | Repeat", 10, 1, darkcolor),
+          SizedBox(
+            height: MediaQuery.of(context).size.height / 2.5,
+          ),
+          GestureDetector(
+              onTap: () {
+                Navigator.push(
+                    context, MaterialPageRoute(builder: (b) => SignUpScreen()));
+              },
+              child: Helper.button('Get Started', 10))
+        ],
+      ),
     ));
   }
 }

@@ -38,8 +38,8 @@ class Helper {
       width: 150,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(radius.toDouble()),
-          gradient: LinearGradient(
-              colors: [Colors.orange, Colors.purple.withOpacity(0.5)])),
+          color: darkcolor
+          ),
     );
   }
 }
