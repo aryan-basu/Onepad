@@ -6,7 +6,8 @@ import 'package:onepad/Helpers/colorhelper.dart';
 import 'package:onepad/Helpers/helpers.dart';
 import 'package:onepad/Screens/Errors/Alert.dart';
 import 'package:onepad/Screens/HomeScreen/homeScreen.dart';
-import 'package:onepad/Screens/SignupScreen/SignupScreen.dart';
+import 'package:onepad/Screens/SingupScreen/SignupScreen.dart';
+
 import 'package:onepad/Services/const.dart';
 
 class SignInScreen extends StatefulWidget {
@@ -83,7 +84,7 @@ class _SignInScreenState extends State<SignInScreen> {
                   width: MediaQuery.of(context).size.width - 100,
                   decoration: BoxDecoration(
                       image: DecorationImage(
-                          image: AssetImage('assets/images/Login.png'))),
+                          image: AssetImage('assets/images/login.png'))),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(40.0),
@@ -191,7 +192,7 @@ class _SignInScreenState extends State<SignInScreen> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (b) => SignInScreen()));
+                                    builder: (b) => SignUpScreen()));
                           },
                           child: Helper.text('Do not have an account? Signup',
                               10, 1, darkcolor),
