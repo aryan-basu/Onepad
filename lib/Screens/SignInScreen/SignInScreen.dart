@@ -4,11 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:onepad/Helpers/colorhelper.dart';
 import 'package:onepad/Helpers/helpers.dart';
-import 'package:onepad/Screens/Errors/Alert.dart';
+import 'package:onepad/Screens/Errors/LoadDialog.dart';
 import 'package:onepad/Screens/HomeScreen/homeScreen.dart';
 import 'package:onepad/Screens/SingupScreen/SignupScreen.dart';
 
 import 'package:onepad/Services/const.dart';
+import 'package:onepad/Services/googleSignIn.dart';
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({Key key}) : super(key: key);
@@ -18,9 +19,10 @@ class SignInScreen extends StatefulWidget {
 }
 
 class _SignInScreenState extends State<SignInScreen> {
+  Authentication authentication = Authentication();
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   TextEditingController emailcontroller = new TextEditingController();
-  TextEditingController namecontroller = new TextEditingController();
+
   TextEditingController passwordcontroller = new TextEditingController();
 
   bool isloading = false;
@@ -35,11 +37,11 @@ class _SignInScreenState extends State<SignInScreen> {
       });
       print(emailcontroller.text);
       print(passwordcontroller.text);
-      print(namecontroller.text);
+
       User firebaseUser;
 
       await _firebaseAuth
-          .createUserWithEmailAndPassword(
+          .signInWithEmailAndPassword(
               email: emailcontroller.text.toString(),
               password: passwordcontroller.text.toString())
           .then((auth) {
@@ -49,11 +51,11 @@ class _SignInScreenState extends State<SignInScreen> {
         showDialog(
             context: context,
             builder: (c) {
-              return AlertErrorDialog(message: error.message.toString());
+              return LoadingErrorDialog(message: error.message.toString());
             });
       });
       if (firebaseUser != null) {
-        uploaddata(firebaseUser).then((value) {
+        readdata(firebaseUser).then((value) {
           Route route = MaterialPageRoute(builder: (c) => HomeScreen());
           Navigator.pushReplacement(context, route);
         });
@@ -61,13 +63,22 @@ class _SignInScreenState extends State<SignInScreen> {
     }
   }
 
-  uploaddata(User user) async {
-    FirebaseFirestore.instance.collection('Users').doc(user.uid).set({
-      "uid": user.uid,
-      "email": user.email,
+  readdata(User fuser) async {
+    FirebaseFirestore.instance
+        .collection('Users')
+        .doc(fuser.uid)
+        .get()
+        .then((dataSnapshot) async {
+      print(dataSnapshot.data()['uid']);
+      print(dataSnapshot.data()['email']);
+      print(dataSnapshot.data()['userimage']);
+      await Onepad.sharedPreferences
+          .setString("username", dataSnapshot.data()["username"]);
+      await Onepad.sharedPreferences
+          .setString("uid", dataSnapshot.data()["uid"]);
+      await Onepad.sharedPreferences
+          .setString("email", dataSnapshot.data()["email"]);
     });
-    Onepad.sharedPreferences.setString('uid', user.uid);
-    Onepad.sharedPreferences.setString('email', user.email);
   }
 
   @override
@@ -187,6 +198,72 @@ class _SignInScreenState extends State<SignInScreen> {
                         SizedBox(
                           height: 20,
                         ),
+                        Row(children: <Widget>[
+                          Expanded(
+                            child: new Container(
+                                margin: const EdgeInsets.only(
+                                    left: 10.0, right: 20.0),
+                                child: Divider(
+                                  color: darkcolor,
+                                  height: 20,
+                                )),
+                          ),
+                          Helper.text('OR', 16, 1, darktextcolor),
+                          Expanded(
+                            child: new Container(
+                                margin: const EdgeInsets.only(
+                                    left: 20.0, right: 10.0),
+                                child: Divider(
+                                  color: darkcolor,
+                                  height: 20,
+                                )),
+                          ),
+                        ]),
+                        GestureDetector(
+                          onTap: () async {
+                            await authentication
+                                .googleSignIn()
+                                .whenComplete(() => {
+                                      Navigator.pushReplacement(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (b) => HomeScreen()))
+                                    });
+                          },
+                          child: Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: Container(
+                              height: 60,
+                              decoration: BoxDecoration(
+                                  color: darkcolor,
+                                  borderRadius: BorderRadius.circular(40)),
+                              child: Padding(
+                                padding: const EdgeInsets.all(.0),
+                                child: Row(
+                                  // mainAxisAlignment:
+                                  //     MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    SizedBox(
+                                      width: 40,
+                                    ),
+                                    Container(
+                                        height: 20,
+                                        child: Image.network(
+                                            'https://image.flaticon.com/icons/png/128/2702/2702602.png')),
+                                    SizedBox(
+                                      width: 30,
+                                    ),
+                                    Helper.text('SignIn with Google', 18, 1,
+                                        lighttextcolor),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
                         GestureDetector(
                           onTap: () {
                             Navigator.push(
@@ -196,7 +273,7 @@ class _SignInScreenState extends State<SignInScreen> {
                           },
                           child: Helper.text('Do not have an account? Signup',
                               10, 1, darkcolor),
-                        )
+                        ),
                       ],
                     ),
                   ),
