@@ -5,7 +5,7 @@ import 'package:onepad/Helpers/colorhelper.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'HomePage.dart';
 
-class LoginPage extends StatelessWidget {
+class GetStarted extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
