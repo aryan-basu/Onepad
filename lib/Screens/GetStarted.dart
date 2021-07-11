@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'HomePage.dart';
+import 'package:onepad/Screens/HomePage.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class GetStarted extends StatelessWidget {
