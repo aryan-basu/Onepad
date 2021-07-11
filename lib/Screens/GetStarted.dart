@@ -1,9 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:onepad/Helpers/helpers.dart';
-import 'package:onepad/Helpers/colorhelper.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'HomePage.dart';
 
 class GetStarted extends StatelessWidget {
   @override
@@ -13,41 +9,31 @@ class GetStarted extends StatelessWidget {
       children: [
         Image.asset(
           "assets/images/icon.png",
-          fit: BoxFit.scaleDown,
+          fit: BoxFit.contain,
         ),
         SizedBox(
           height: 20,
         ),
-        Helper.text("Welcome to Onepad!", 14, 2, darktextcolor),
+        Text("Welcome to Onepad",
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
         SizedBox(
           height: 20,
         ),
-        Helper.text("Daily Notes", 10, 2, darktextcolor),
+        Text("Daily Notes"),
         SizedBox(
           height: 20,
         ),
-        Helper.text(
-            "Take notes, reminders, set targets, collect resources and secure privacy",
-            8,
-            2,
-            darktextcolor),
+        Text(
+            "Take notes, reminders, set targets, collect resources and secure privacy"),
         SizedBox(
-          height: 30,
+          height: 40,
         ),
         ElevatedButton(
-          onPressed: () {
-            Navigator.push(
-                context, MaterialPageRoute(builder: (context) => HomePage()));
-          },
-          child: Text(
-            "Get Started",
-            style: TextStyle(
-              fontFamily: GoogleFonts.ubuntu(fontSize: 20).fontFamily,
-            ),
-          ),
+          onPressed: () {},
+          child: Text("Get Started"),
           style: TextButton.styleFrom(
-              backgroundColor: lightcolor,
-              primary: Colors.white,
+              backgroundColor: Colors.yellow,
+              primary: Colors.black,
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(18))),
         )
