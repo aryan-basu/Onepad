@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:onepad/Screens/GetStarted.dart';
-import 'package:onepad/Screens/SingupScreen/SignupScreen.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:onepad/Screens/SplashScreen.dart';
 import 'package:onepad/Services/const.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -31,7 +30,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: GetStarted(),
+      home: SplashScreen(),
     );
   }
 }

@@ -71,7 +71,7 @@ class _SignInScreenState extends State<SignInScreen> {
         .then((dataSnapshot) async {
       print(dataSnapshot.data()['uid']);
       print(dataSnapshot.data()['email']);
-      print(dataSnapshot.data()['userimage']);
+      print(dataSnapshot.data()['username']);
       await Onepad.sharedPreferences
           .setString("username", dataSnapshot.data()["username"]);
       await Onepad.sharedPreferences
