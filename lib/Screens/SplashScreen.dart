@@ -5,6 +5,7 @@ import 'package:onepad/Helpers/colorhelper.dart';
 import 'package:onepad/Helpers/helpers.dart';
 import 'package:onepad/Screens/GetStarted.dart';
 import 'package:onepad/Screens/HomeScreen/homeScreen.dart';
+import 'package:onepad/Services/const.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key key}) : super(key: key);
@@ -14,13 +15,16 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  String userid = Onepad.sharedPreferences.getString('uid');
   @override
   void initState() {
     // TODO: implement initState
     Timer(
         Duration(seconds: 5),
         () => Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (b) => GetStarted())));
+            context,
+            MaterialPageRoute(
+                builder: (b) => userid == null ? GetStarted() : HomeScreen())));
     super.initState();
   }
 
