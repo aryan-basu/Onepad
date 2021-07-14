@@ -66,9 +66,7 @@ class _HomeScreenState extends State<HomeScreen> {
         unselectedItemColor: darkcolor,
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-              icon: Icon(
-                Icons.list
-              ),
+              icon: Icon(Icons.widgets_outlined),
               title: Helper.text('', 15, 0, Colors.black)),
           BottomNavigationBarItem(
               icon: Icon(Icons.person),
