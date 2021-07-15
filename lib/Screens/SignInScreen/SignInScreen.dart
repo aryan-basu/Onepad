@@ -60,27 +60,65 @@ class _SignInScreenState extends State<SignInScreen> {
   }
 
   Future<Null> _login() async {
-    final FacebookLoginResult result = await facebookSignIn.logIn(['email']);
+    final FacebookLoginResult result =
+        await facebookSignIn.logIn(['email', 'public_profile']);
 
     switch (result.status) {
       case FacebookLoginStatus.loggedIn:
+        FacebookAccessToken _accessToken = result.accessToken;
+
+        AuthCredential fbcredential =
+            FacebookAuthProvider.credential(_accessToken.token);
+
+        _firebaseAuth.signInWithCredential(fbcredential).then((fbuser) {
+          Onepad.sharedPreferences.setString('username', fbuser.user.displayName);
+          Onepad.sharedPreferences.setString('email', fbuser.user.email);
+          print("SUZZESS");
+
+          print(fbuser.user.email);
+
+          print(fbuser.user.phoneNumber);
+
+          print(fbuser.user.photoURL);
+
+          print(fbuser.user.displayName);
+
+          print(fbuser.user.uid);
+        }).catchError((e) {
+          print(e);
+
+          print("ERROR");
+        });
+
         final FacebookAccessToken accessToken = result.accessToken;
+
         _showMessage('''
-         Logged in!
-         
+
+         Logged in!         
+
          Token: ${accessToken.token}
+
          User id: ${accessToken.userId}
+
          Expires: ${accessToken.expires}
+
          Permissions: ${accessToken.permissions}
+
          Declined permissions: ${accessToken.declinedPermissions}
+
          ''');
+
         break;
+
       case FacebookLoginStatus.cancelledByUser:
         _showMessage('Login cancelled by the user.');
+
         break;
+
       case FacebookLoginStatus.error:
         _showMessage('Something went wrong with the login process.\n'
             'Here\'s the error Facebook gave us: ${result.errorMessage}');
+
         break;
     }
   }
