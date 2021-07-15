@@ -1,8 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-// import 'package:flutter_facebook_login/flutter_facebook_login.dart';
+import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:onepad/Helpers/colorhelper.dart';
 import 'package:onepad/Helpers/helpers.dart';
 import 'package:onepad/Screens/Errors/LoadDialog.dart';
@@ -20,7 +21,8 @@ class SignInScreen extends StatefulWidget {
 }
 
 class _SignInScreenState extends State<SignInScreen> {
-  Authentication authentication = Authentication();
+  final GoogleSignIn _googleSignIn = GoogleSignIn();
+
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   TextEditingController emailcontroller = new TextEditingController();
 
@@ -28,46 +30,47 @@ class _SignInScreenState extends State<SignInScreen> {
 
   bool isloading = false;
   bool passwordvisibility = false;
-  // static final FacebookLogin facebookSignIn = new FacebookLogin();
-
-  // String _message = 'Log in/out by pressing the buttons below.';
   final formKey = GlobalKey<FormState>();
-  // Future<Null> _login() async {
-  //   final FacebookLoginResult result = await facebookSignIn.logIn(['email']);
+  static final FacebookLogin facebookSignIn = new FacebookLogin();
 
-  //   switch (result.status) {
-  //     case FacebookLoginStatus.loggedIn:
-  //       final FacebookAccessToken accessToken = result.accessToken;
-  //       _showMessage('''
-  //        Logged in!
+  String _message = 'Log in/out by pressing the buttons below.';
 
-  //        Token: ${accessToken.token}
-  //        User id: ${accessToken.userId}
-  //        Expires: ${accessToken.expires}
-  //        Permissions: ${accessToken.permissions}
-  //        Declined permissions: ${accessToken.declinedPermissions}
-  //        ''');
-  //       break;
-  //     case FacebookLoginStatus.cancelledByUser:
-  //       _showMessage('Login cancelled by the user.');
-  //       break;
-  //     case FacebookLoginStatus.error:
-  //       _showMessage('Something went wrong with the login process.\n'
-  //           'Here\'s the error Facebook gave us: ${result.errorMessage}');
-  //       break;
-  //   }
-  // }
+  Future<Null> _login() async {
+    final FacebookLoginResult result = await facebookSignIn.logIn(['email']);
 
-  // Future<Null> _logOut() async {
-  //   await facebookSignIn.logOut();
-  //   _showMessage('Logged out.');
-  // }
+    switch (result.status) {
+      case FacebookLoginStatus.loggedIn:
+        final FacebookAccessToken accessToken = result.accessToken;
+        _showMessage('''
+         Logged in!
+         
+         Token: ${accessToken.token}
+         User id: ${accessToken.userId}
+         Expires: ${accessToken.expires}
+         Permissions: ${accessToken.permissions}
+         Declined permissions: ${accessToken.declinedPermissions}
+         ''');
+        break;
+      case FacebookLoginStatus.cancelledByUser:
+        _showMessage('Login cancelled by the user.');
+        break;
+      case FacebookLoginStatus.error:
+        _showMessage('Something went wrong with the login process.\n'
+            'Here\'s the error Facebook gave us: ${result.errorMessage}');
+        break;
+    }
+  }
 
-  // void _showMessage(String message) {
-  //   setState(() {
-  //     _message = message;
-  //   });
-  // }
+  Future<Null> _logOut() async {
+    await facebookSignIn.logOut();
+    _showMessage('Logged out.');
+  }
+
+  void _showMessage(String message) {
+    setState(() {
+      _message = message;
+    });
+  }
 
   Future<void> _signin() async {
     if (formKey.currentState.validate()) {
@@ -111,12 +114,10 @@ class _SignInScreenState extends State<SignInScreen> {
       print(dataSnapshot.data()['uid']);
       print(dataSnapshot.data()['email']);
       print(dataSnapshot.data()['username']);
-      await Onepad.sharedPreferences
+      Onepad.sharedPreferences
           .setString("username", dataSnapshot.data()["username"]);
-      await Onepad.sharedPreferences
-          .setString("uid", dataSnapshot.data()["uid"]);
-      await Onepad.sharedPreferences
-          .setString("email", dataSnapshot.data()["email"]);
+      Onepad.sharedPreferences.setString("uid", dataSnapshot.data()["uid"]);
+      Onepad.sharedPreferences.setString("email", dataSnapshot.data()["email"]);
     });
   }
 
@@ -130,7 +131,7 @@ class _SignInScreenState extends State<SignInScreen> {
             child: Column(
               children: [
                 Container(
-                  height: MediaQuery.of(context).size.height / 2,
+                  height: MediaQuery.of(context).size.height / 1.8,
                   width: MediaQuery.of(context).size.width - 100,
                   decoration: BoxDecoration(
                       image: DecorationImage(
@@ -225,6 +226,7 @@ class _SignInScreenState extends State<SignInScreen> {
                         },
                         child: Container(
                           height: 60,
+                          width: MediaQuery.of(context).size.width / 2,
                           decoration: BoxDecoration(
                               color: darkcolor,
                               borderRadius: BorderRadius.circular(40)),
@@ -241,17 +243,38 @@ class _SignInScreenState extends State<SignInScreen> {
                         children: [
                           GestureDetector(
                             onTap: () async {
-                              await authentication
-                                  .googleSignIn()
-                                  .whenComplete(() => {
-                                        Navigator.pushReplacement(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (b) => HomeScreen()))
-                                      });
+                              try {
+                                GoogleSignInAccount googleSignInAccount =
+                                    await _googleSignIn.signIn();
+                                if (googleSignInAccount != null) {
+                                  GoogleSignInAuthentication
+                                      googleAuthentication =
+                                      await googleSignInAccount.authentication;
+                                  AuthCredential authCredential =
+                                      GoogleAuthProvider.credential(
+                                    accessToken:
+                                        googleAuthentication.accessToken,
+                                  );
+                                  try {
+                                    UserCredential userCredential =
+                                        await _firebaseAuth
+                                            .signInWithCredential(
+                                                authCredential);
+                                    final User user = userCredential.user;
+                                    Onepad.sharedPreferences.setString(
+                                        'username', user.displayName);
+                                    Onepad.sharedPreferences
+                                        .setString('email', user.email);
+                                  } catch (e) {
+                                    print(e);
+                                  }
+                                }
+                              } catch (e) {
+                                print(e);
+                              }
                             },
                             child: Container(
-                                height: 20,
+                                height: 25,
                                 child: Image.network(
                                     'https://image.flaticon.com/icons/png/128/2702/2702602.png')),
                           ),
@@ -260,11 +283,16 @@ class _SignInScreenState extends State<SignInScreen> {
                           ),
                           GestureDetector(
                             onTap: () {
-                              // _login();
+                              _login().whenComplete(() {
+                                Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (b) => HomeScreen()));
+                              });
                             },
                             child: Image.network(
                               "https://image.flaticon.com/icons/png/128/733/733547.png",
-                              height: 20,
+                              height: 25,
                             ),
                           ),
                         ],

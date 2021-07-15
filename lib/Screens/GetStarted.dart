@@ -10,6 +10,7 @@ class GetStarted extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: background,
         body: SafeArea(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
