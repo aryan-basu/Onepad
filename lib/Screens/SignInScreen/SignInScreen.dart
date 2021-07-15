@@ -35,6 +35,30 @@ class _SignInScreenState extends State<SignInScreen> {
 
   String _message = 'Log in/out by pressing the buttons below.';
 
+  Future<void> _googleSignin() async {
+    try {
+      GoogleSignInAccount googleSignInAccount = await _googleSignIn.signIn();
+      if (googleSignInAccount != null) {
+        GoogleSignInAuthentication googleAuthentication =
+            await googleSignInAccount.authentication;
+        AuthCredential authCredential = GoogleAuthProvider.credential(
+          accessToken: googleAuthentication.accessToken,
+        );
+        try {
+          UserCredential userCredential =
+              await _firebaseAuth.signInWithCredential(authCredential);
+          final User user = userCredential.user;
+          Onepad.sharedPreferences.setString('username', user.displayName);
+          Onepad.sharedPreferences.setString('email', user.email);
+        } catch (e) {
+          print(e);
+        }
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
+
   Future<Null> _login() async {
     final FacebookLoginResult result = await facebookSignIn.logIn(['email']);
 
@@ -242,36 +266,13 @@ class _SignInScreenState extends State<SignInScreen> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           GestureDetector(
-                            onTap: () async {
-                              try {
-                                GoogleSignInAccount googleSignInAccount =
-                                    await _googleSignIn.signIn();
-                                if (googleSignInAccount != null) {
-                                  GoogleSignInAuthentication
-                                      googleAuthentication =
-                                      await googleSignInAccount.authentication;
-                                  AuthCredential authCredential =
-                                      GoogleAuthProvider.credential(
-                                    accessToken:
-                                        googleAuthentication.accessToken,
-                                  );
-                                  try {
-                                    UserCredential userCredential =
-                                        await _firebaseAuth
-                                            .signInWithCredential(
-                                                authCredential);
-                                    final User user = userCredential.user;
-                                    Onepad.sharedPreferences.setString(
-                                        'username', user.displayName);
-                                    Onepad.sharedPreferences
-                                        .setString('email', user.email);
-                                  } catch (e) {
-                                    print(e);
-                                  }
-                                }
-                              } catch (e) {
-                                print(e);
-                              }
+                            onTap: () {
+                              _googleSignin().whenComplete(() {
+                                Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (b) => HomeScreen()));
+                              });
                             },
                             child: Container(
                                 height: 25,
