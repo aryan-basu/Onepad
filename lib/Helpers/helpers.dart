@@ -32,10 +32,10 @@ class Helper {
   static Widget button(String msg, int radius) {
     return Container(
       child: Center(
-        child: Helper.text(msg, 18, 0, lighttextcolor),
+        child: Helper.subtext(msg, 14, 0, lighttextcolor),
       ),
       height: 50,
-      width: 150,
+      width: 100,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(radius.toDouble()),
           color: darkcolor

@@ -1,42 +1,47 @@
 import 'package:flutter/material.dart';
 import 'package:onepad/Helpers/colorhelper.dart';
 import 'package:onepad/Helpers/helpers.dart';
-import 'package:onepad/Screens/SignUpScreen.dart';
+import 'package:onepad/Screens/SingupScreen/SignupScreen.dart';
 
-class OnboardingScreen extends StatefulWidget {
+class OnboardScreen extends StatefulWidget {
+  static const String id = "onboard_screen";
+  OnboardScreen({Key key}) : super(key: key);
+
   @override
-  _OnboardingScreenState createState() => _OnboardingScreenState();
+  _OnboardScreenState createState() => _OnboardScreenState();
 }
 
-class _OnboardingScreenState extends State<OnboardingScreen> {
+class _OnboardScreenState extends State<OnboardScreen> {
   final _controller = PageController();
+
   int _currentPage = 0;
 
   final List<Map<String, String>> splashData = [
     {
-      "subtitle": "Click on the '+' icon to start a new note",
-      "image": "assets/images/Onboard1.png",
-      "title": "Take Notes On The Go!",
+      "title": "Welcome to Onepad",
+      "subtitle": "Make your'e first note ",
+      "image": "assets/images/Onboard1.png"
     },
     {
-      "title": "Add Images",
-      "subtitle": "Add images from your Gallery",
+      "title": "Save Images",
+      "subtitle": "Upload your'e favourite images ",
       "image": "assets/images/Onboard2.png"
     },
     {
-      "title": "Add Voice Notes",
-      "subtitle": "In a hurry? Add a voice note!",
+      "title": "Voice notes",
+      "subtitle": "Lazy to write just speak",
       "image": "assets/images/Onboard3.png"
     },
   ];
-  AnimatedContainer _buildDots({required int index}) {
+
+  AnimatedContainer _buildDots({int index}) {
     return AnimatedContainer(
       duration: const Duration(milliseconds: 200),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.all(
           Radius.circular(50),
         ),
-        color: darkcolor,
+        color: _currentPage == index ? darkcolor : lightcolor,
       ),
       margin: const EdgeInsets.only(right: 5),
       height: 10,
@@ -51,118 +56,147 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       backgroundColor: background,
       body: SafeArea(
         child: Column(
-          children: <Widget>[
+          children: [
             Expanded(
               flex: 3,
               child: PageView.builder(
                 controller: _controller,
                 itemCount: splashData.length,
                 itemBuilder: (BuildContext context, int index) {
-                  return Column(
-                    children: <Widget>[
-                      Padding(
-                        padding: const EdgeInsets.only(top: 20.0),
+                  return Column(children: [
+                    Spacer(flex: 2),
+                    Padding(
+                      padding: EdgeInsets.only(bottom: 10),
+                      child: Helper.text("${(splashData[index]['title'])}", 20,
+                          0, Colors.black),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 8.0),
+                      child: Container(
+                        constraints: BoxConstraints(
+                            maxWidth: MediaQuery.of(context).size.width - 100),
+                        child: Helper.text("${(splashData[index]['subtitle'])}",
+                            18, 0, Colors.grey),
                       ),
-                      Spacer(flex: 2),
-                      Padding(
-                        padding: const EdgeInsets.only(bottom: 15.0),
-                        child: AspectRatio(
-                          aspectRatio: 16 / 9,
-                          child: Image.asset(
-                            splashData[index]['image']!,
-                            fit: BoxFit.contain,
-                          ),
-                        ),
-                      ),
-                      Helper.text(
-                          splashData[index]['title']!, 18, 2, darktextcolor),
-                      Spacer(
-                        flex: 1,
-                      ),
-                      Helper.text(
-                          splashData[index]['subtitle']!, 14, 2, darktextcolor),
-                      Spacer(),
-                    ],
-                  );
+                    ),
+                    Spacer(flex: 2),
+                    AspectRatio(
+                      aspectRatio: 16 / 9,
+                      child: Image.asset('${(splashData[index]['image'])}',
+                          fit: BoxFit.contain),
+                    ),
+                    Spacer(),
+                  ]);
                 },
-                onPageChanged: (value) => setState(() => _currentPage = value),
+                onPageChanged: (value) => setState(() {
+                  _currentPage = value;
+                }),
               ),
             ),
             Expanded(
-              flex: 1,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.only(top: 40.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: List.generate(
-                        splashData.length,
-                        (int index) => _buildDots(index: index),
-                      ),
-                    ),
-                  ),
-                  Spacer(),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 40.0),
-                    child: SizedBox(
-                      height: 45,
-                      width: MediaQuery.of(context).size.width,
-                      // ignore: deprecated_member_use
-                      child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            _currentPage + 1 == splashData.length
-                                ? GestureDetector(
-                                    onTap: () {
-                                      _controller.nextPage(
-                                        duration:
-                                            const Duration(milliseconds: 200),
-                                        curve: Curves.easeIn,
-                                      );
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (b) => SignUpScreen()));
-                                    },
-                                    child: Helper.button('Get Started', 20))
-                                : Padding(
-                                    padding: const EdgeInsets.only(top: 0.2),
-                                    child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: <Widget>[
-                                          GestureDetector(
-                                              onTap: () {
-                                                Navigator.push(
+                flex: 1,
+                child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Padding(
+                          padding: EdgeInsets.only(top: 100),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: List.generate(splashData.length,
+                                (int index) => _buildDots(index: index)),
+                          )),
+                      Spacer(),
+                      SizedBox(
+                          height: 70,
+                          child: _currentPage != 2
+                              ? Padding(
+                                  padding: const EdgeInsets.only(left: 20.0),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Padding(
+                                        padding:
+                                            const EdgeInsets.only(bottom: 20.0),
+                                        child: GestureDetector(
+                                            onTap: () {
+                                              Navigator.pushReplacement(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                      builder: (b) =>
+                                                          SignUpScreen()));
+                                            },
+                                            child: Container(
+                                              child: Center(
+                                                child: Helper.subtext('Skip',
+                                                    14, 0, lighttextcolor),
+                                              ),
+                                              height: 40,
+                                              width: 100,
+                                              decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(40),
+                                                  color: darkcolor),
+                                            )),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.only(
+                                            right: 30, bottom: 20.0),
+                                        child: GestureDetector(
+                                            onTap: () {
+                                              if (_currentPage == 2) {
+                                                Navigator.pushReplacement(
                                                     context,
                                                     MaterialPageRoute(
                                                         builder: (b) =>
                                                             SignUpScreen()));
-                                              },
-                                              child: Helper.button("Skip", 20)),
-                                          SizedBox(
-                                            width: 50,
-                                          ),
-                                          GestureDetector(
-                                              onTap: () {
-                                                _controller.nextPage(
-                                                  duration: const Duration(
-                                                      milliseconds: 200),
-                                                  curve: Curves.easeIn,
-                                                );
-                                              },
-                                              child:
-                                                  Helper.button('Continue', 20))
-                                        ]))
-                          ]),
-                    ),
-                  ),
-                  Spacer(),
-                ],
-              ),
-            ),
+                                              }
+                                              _controller
+                                                  .jumpToPage(++_currentPage);
+                                            },
+                                            child: Container(
+                                              child: Center(
+                                                child: Helper.subtext(
+                                                    'Continue',
+                                                    14,
+                                                    0,
+                                                    darkcolor),
+                                              ),
+                                              height: 50,
+                                              width: 100,
+                                              decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(20),
+                                                  color: Colors.transparent),
+                                            )),
+                                      ),
+                                    ],
+                                  ),
+                                )
+                              : Padding(
+                                  padding: const EdgeInsets.only(bottom: 20.0),
+                                  child: GestureDetector(
+                                      onTap: () {
+                                        Navigator.pushReplacement(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (b) =>
+                                                    SignUpScreen()));
+                                      },
+                                      child: Container(
+                                        child: Center(
+                                          child: Helper.subtext('Get Started',
+                                              14, 0, lighttextcolor),
+                                        ),
+                                        height: 50,
+                                        width: 300,
+                                        decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(40),
+                                            color: darkcolor),
+                                      )),
+                                ))
+                    ])),
           ],
         ),
       ),
