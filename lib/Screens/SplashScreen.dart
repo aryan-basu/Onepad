@@ -15,18 +15,18 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  String userid = Onepad.sharedPreferences.getString('uid');
-  
+  String userid = Onepad.sharedPreferences.getString('username');
+
   @override
   void initState() {
     // TODO: implement initState
     print(Onepad.sharedPreferences.getString('username'));
     Timer(
-        Duration(seconds: 5),
+        Duration(seconds: 2),
         () => Navigator.pushReplacement(
             context,
             MaterialPageRoute(
-                builder: (b) =>  GetStarted())));
+                builder: (b) => userid == null ? GetStarted() : HomeScreen())));
     super.initState();
   }
 
@@ -46,7 +46,6 @@ class _SplashScreenState extends State<SplashScreen> {
               SizedBox(
                 height: 20,
               ),
-             
             ],
           ),
         ));

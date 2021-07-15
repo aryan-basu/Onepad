@@ -5,6 +5,7 @@ import 'package:onepad/Screens/Notes/notes.dart';
 import 'package:onepad/Services/const.dart';
 
 class HomeScreen extends StatefulWidget {
+  
   const HomeScreen({Key key}) : super(key: key);
 
   @override
@@ -12,6 +13,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  String username=Onepad.sharedPreferences.getString('username');
   int _currentindex = 0;
   List<Widget> options = <Widget>[
     Helper.text('Home', 20, 0, Colors.black),
@@ -40,8 +42,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 Padding(
                     padding: const EdgeInsets.all(18.0),
                     child: Helper.subtext(
-                        'Hello ' +
-                            '${(Onepad.sharedPreferences.getString('username'))} !',
+                       username==null?'Hello ':'Hello '+username+" !",
                         20,
                         0,
                         darktextcolor)),
