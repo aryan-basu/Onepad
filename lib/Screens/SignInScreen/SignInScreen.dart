@@ -268,10 +268,16 @@ class _SignInScreenState extends State<SignInScreen> {
                           GestureDetector(
                             onTap: () {
                               _googleSignin().whenComplete(() {
-                                Navigator.pushReplacement(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (b) => HomeScreen()));
+                                Onepad.sharedPreferences.getString('email') !=
+                                        null
+                                    ? Navigator.pushReplacement(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (b) => HomeScreen()))
+                                    : Navigator.pushReplacement(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (b) => SignInScreen()));
                               });
                             },
                             child: Container(
