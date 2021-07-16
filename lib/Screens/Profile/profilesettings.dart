@@ -106,13 +106,15 @@ class _EditPageState extends State<EditPage> {
               SizedBox(
                 height: 35,
               ),
+              buildTextField("Location", "India", false),
               buildTextField("Full Name", "Anjali Deshmukh", false),
               buildTextField("E-mail", "anjali557@gmail.com", false),
-              buildTextField("Password", "********", true),
-              buildTextField("Location", "India", false),
+              buildTextField("Phone", "----------", false),
+              buildTextField("Status/About", "My description / about me", false),
               SizedBox(
                 height: 35,
               ),
+              
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
