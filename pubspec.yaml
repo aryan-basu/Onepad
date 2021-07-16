@@ -56,6 +56,7 @@ flutter:
     - assets/images/Onboard1.png
     - assets/images/Onboard2.png
     - assets/images/Onboard3.png
+    - assets/images/Splash.gif
   #   - images/a_dot_ham.jpeg
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
