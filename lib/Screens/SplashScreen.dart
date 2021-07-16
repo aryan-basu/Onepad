@@ -30,7 +30,7 @@ class _SplashScreenState extends State<SplashScreen> {
             children: [
               Container(
                 alignment: Alignment.center,
-                height: MediaQuery.of(context).size.height / 1.5,
+                height: MediaQuery.of(context).size.height / 3,
                 child:
                     Image.asset('assets/images/Splash.gif', fit: BoxFit.cover),
               ),
