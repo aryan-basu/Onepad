@@ -3,6 +3,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:onepad/Screens/SplashScreen.dart';
 import 'package:onepad/Services/const.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:onepad/Screens/Profile/userprofile.dart';
+import 'package:onepad/Screens/Profile/profilesettings.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
