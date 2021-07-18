@@ -6,6 +6,7 @@ import 'package:onepad/Helpers/colorhelper.dart';
 import 'package:onepad/Helpers/helpers.dart';
 import 'package:onepad/Screens/Errors/Alert.dart';
 import 'package:onepad/Screens/HomeScreen/homeScreen.dart';
+import 'package:onepad/Screens/Info/Gettinginfo.dart';
 import 'package:onepad/Screens/SignInScreen/SignInScreen.dart';
 import 'package:onepad/Services/const.dart';
 
@@ -53,7 +54,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       });
       if (firebaseUser != null) {
         uploaddata(firebaseUser).then((value) {
-          Route route = MaterialPageRoute(builder: (c) => HomeScreen());
+          Route route = MaterialPageRoute(builder: (c) => GettingInfo());
           Navigator.pushReplacement(context, route);
         });
       }

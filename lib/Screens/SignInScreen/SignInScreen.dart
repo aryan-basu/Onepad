@@ -8,11 +8,8 @@ import 'package:onepad/Helpers/colorhelper.dart';
 import 'package:onepad/Helpers/helpers.dart';
 import 'package:onepad/Screens/Errors/LoadDialog.dart';
 import 'package:onepad/Screens/HomeScreen/homeScreen.dart';
-import 'package:onepad/Screens/Profile/userprofile.dart';
 import 'package:onepad/Screens/SingupScreen/SignupScreen.dart';
-
 import 'package:onepad/Services/const.dart';
-import 'package:onepad/Services/googleSignIn.dart';
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({Key key}) : super(key: key);

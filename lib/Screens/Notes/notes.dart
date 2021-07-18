@@ -59,6 +59,7 @@ class _NotesState extends State<Notes> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         body: Container(
           child: Column(
             children: [
@@ -86,10 +87,11 @@ class _NotesState extends State<Notes> {
                                 gravity: Toast.CENTER)
                             : uploadimage().then((url) {
                                 FirebaseFirestore.instance
-                                    .collection('Notes')
+                                    .collection('Users')
                                     .doc(Onepad.sharedPreferences
                                         .getString('uid'))
-                                    .set({
+                                    .collection('Notes')
+                                    .add({
                                   'title': titlecontroller.text.toString(),
                                   'description': descontroller.text.toString(),
                                   'created':
@@ -101,7 +103,7 @@ class _NotesState extends State<Notes> {
                                       duration: Toast.LENGTH_LONG,
                                       backgroundColor: lightcolor,
                                       textColor: Colors.white,
-                                      gravity: Toast.CENTER);
+                                      gravity: Toast.BOTTOM);
                                 });
                               });
                       },

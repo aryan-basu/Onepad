@@ -3,7 +3,9 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 
 import 'package:onepad/Helpers/colorhelper.dart';
+import 'package:onepad/Screens/HomeScreen/homeScreen.dart';
 import 'package:onepad/Screens/Onboarding/Onboarding.dart';
+import 'package:onepad/Services/const.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -11,12 +13,15 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  String uid = Onepad.sharedPreferences.getString('uid');
   @override
   void initState() {
     Timer(
         Duration(seconds: 5),
         () => Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (b) => OnboardScreen())));
+            context,
+            MaterialPageRoute(
+                builder: (b) => uid == null ? OnboardScreen() : HomeScreen())));
     super.initState();
   }
 
