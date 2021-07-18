@@ -8,6 +8,7 @@ import 'package:onepad/Helpers/colorhelper.dart';
 import 'package:onepad/Helpers/helpers.dart';
 import 'package:onepad/Screens/Errors/LoadDialog.dart';
 import 'package:onepad/Screens/HomeScreen/homeScreen.dart';
+import 'package:onepad/Screens/Profile/userprofile.dart';
 import 'package:onepad/Screens/SingupScreen/SignupScreen.dart';
 
 import 'package:onepad/Services/const.dart';
@@ -71,7 +72,8 @@ class _SignInScreenState extends State<SignInScreen> {
             FacebookAuthProvider.credential(_accessToken.token);
 
         _firebaseAuth.signInWithCredential(fbcredential).then((fbuser) {
-          Onepad.sharedPreferences.setString('username', fbuser.user.displayName);
+          Onepad.sharedPreferences
+              .setString('username', fbuser.user.displayName);
           Onepad.sharedPreferences.setString('email', fbuser.user.email);
           print("SUZZESS");
 

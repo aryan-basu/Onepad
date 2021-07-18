@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:onepad/Screens/Profile/profilesettings.dart';
 
 
 class ProfilePage extends StatelessWidget {
@@ -19,8 +20,8 @@ class ProfilePage extends StatelessWidget {
           child: Column(
             children: <Widget>[
               ProfileHeader(
-                avatar: NetworkImage(avatars[0]),
-                coverImage: NetworkImage(images[1]),
+                avatar: NetworkImage('avatars[0]'),
+                coverImage: NetworkImage('images[1]'),
                 title: "Anjali Deskmukh",
                 subtitle: "Developer",
                 actions: <Widget>[
@@ -29,7 +30,9 @@ class ProfilePage extends StatelessWidget {
                     shape: CircleBorder(),
                     elevation: 0,
                     child: Icon(Icons.edit),
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (b)=>EditPage()));
+                    },
                   )
                 ],
               ),
@@ -114,14 +117,14 @@ class ProfileHeader extends StatelessWidget {
   final ImageProvider<dynamic> coverImage;
   final ImageProvider<dynamic> avatar;
   final String title;
-  final String? subtitle;
-  final List<Widget>? actions;
+  final String subtitle;
+  final List<Widget> actions;
 
   const ProfileHeader(
-      {Key? key,
-      required this.coverImage,
-      required this.avatar,
-      required this.title,
+      {Key key,
+       this.coverImage,
+       this.avatar,
+       this.title,
       this.subtitle,
       this.actions})
       : super(key: key);
@@ -149,7 +152,7 @@ class ProfileHeader extends StatelessWidget {
             alignment: Alignment.bottomRight,
             child: Row(
               mainAxisSize: MainAxisSize.min,
-              children: actions!,
+              children: actions,
             ),
           ),
         Container(
@@ -171,7 +174,7 @@ class ProfileHeader extends StatelessWidget {
               if (subtitle != null) ...[
                 const SizedBox(height: 5.0),
                 Text(
-                  subtitle!,
+                  subtitle,
                   style: Theme.of(context).textTheme.subtitle,
                 ),
               ]
@@ -186,13 +189,13 @@ class ProfileHeader extends StatelessWidget {
 class Avatar extends StatelessWidget {
   final ImageProvider<dynamic> image;
   final Color borderColor;
-  final Color? backgroundColor;
+  final Color backgroundColor;
   final double radius;
   final double borderWidth;
 
   const Avatar(
-      {Key? key,
-      required this.image,
+      {Key key,
+       this.image,
       this.borderColor = Colors.grey,
       this.backgroundColor,
       this.radius = 30,
@@ -211,7 +214,7 @@ class Avatar extends StatelessWidget {
             : Theme.of(context).primaryColor,
         child: CircleAvatar(
           radius: radius - borderWidth,
-          backgroundImage: image as ImageProvider<Object>?,
+          backgroundImage: image as ImageProvider<Object>,
         ),
       ),
     );

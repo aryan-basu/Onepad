@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:onepad/Helpers/colorhelper.dart';
 
 class ProfileSettingsPage extends StatelessWidget {
   static final String path = "lib/Screens/Profile/profilesettings.dart";
@@ -24,7 +25,7 @@ class _EditPageState extends State<EditPage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-        elevation: 1,
+        elevation: 0,
         leading: IconButton(
           icon: Icon(
             Icons.arrow_back,
@@ -36,7 +37,7 @@ class _EditPageState extends State<EditPage> {
           IconButton(
             icon: Icon(
               Icons.settings,
-              color: Colors.grey[100],
+              color: darkcolor,
             ),
             onPressed: () {},
           ),
@@ -50,13 +51,7 @@ class _EditPageState extends State<EditPage> {
           },
           child: ListView(
             children: [
-              Text(
-                "Edit Profile",
-                style: TextStyle(fontSize: 25, fontWeight: FontWeight.w500),
-              ),
-              SizedBox(
-                height: 15,
-              ),
+              //
               Center(
                 child: Stack(
                   children: [
@@ -110,11 +105,12 @@ class _EditPageState extends State<EditPage> {
               buildTextField("Full Name", "Anjali Deshmukh", false),
               buildTextField("E-mail", "anjali557@gmail.com", false),
               buildTextField("Phone", "----------", false),
-              buildTextField("Status/About", "My description / about me", false),
+              buildTextField(
+                  "Status/About", "My description / about me", false),
               SizedBox(
                 height: 35,
               ),
-              
+
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
