@@ -8,6 +8,7 @@ import 'package:onepad/Helpers/colorhelper.dart';
 import 'package:onepad/Helpers/helpers.dart';
 import 'package:onepad/Screens/Errors/LoadDialog.dart';
 import 'package:onepad/Screens/HomeScreen/homeScreen.dart';
+import 'package:onepad/Screens/Info/Gettinginfo.dart';
 import 'package:onepad/Screens/SingupScreen/SignupScreen.dart';
 import 'package:onepad/Services/const.dart';
 
@@ -46,6 +47,8 @@ class _SignInScreenState extends State<SignInScreen> {
           UserCredential userCredential =
               await _firebaseAuth.signInWithCredential(authCredential);
           final User user = userCredential.user;
+          print(user.uid);
+          Onepad.sharedPreferences.setString('uid', user.uid);
           Onepad.sharedPreferences.setString('username', user.displayName);
           Onepad.sharedPreferences.setString('email', user.email);
         } catch (e) {
@@ -69,6 +72,7 @@ class _SignInScreenState extends State<SignInScreen> {
             FacebookAuthProvider.credential(_accessToken.token);
 
         _firebaseAuth.signInWithCredential(fbcredential).then((fbuser) {
+          Onepad.sharedPreferences.setString('uid', fbuser.user.uid);
           Onepad.sharedPreferences
               .setString('username', fbuser.user.displayName);
           Onepad.sharedPreferences.setString('email', fbuser.user.email);
@@ -87,6 +91,9 @@ class _SignInScreenState extends State<SignInScreen> {
           print(e);
 
           print("ERROR");
+        }).whenComplete(() {
+          Navigator.pushReplacement(
+              context, MaterialPageRoute(builder: (b) => GettingInfo()));
         });
 
         final FacebookAccessToken accessToken = result.accessToken;

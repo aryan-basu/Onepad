@@ -6,6 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:onepad/Helpers/colorhelper.dart';
+import 'package:onepad/Helpers/helpers.dart';
 import 'package:onepad/Screens/HomeScreen/homeScreen.dart';
 import 'package:onepad/Services/const.dart';
 import 'package:toast/toast.dart';
@@ -19,10 +20,11 @@ class Notes extends StatefulWidget {
 
 class _NotesState extends State<Notes> {
   String returnMonth(DateTime date) {
-    return new DateFormat.MMMM().format(date);
+    return new DateFormat.MMMM().format(DateTime.now());
   }
 
   PickedFile image;
+  String imageurl = "";
 
   void gallery() async {
     final _userimage =
@@ -30,6 +32,12 @@ class _NotesState extends State<Notes> {
     setState(() {
       image = PickedFile(_userimage.path);
     });
+    if (image == null) {
+      print('Not selected');
+    } else {
+      print('File selected');
+      uploadimage();
+    }
   }
 
   void camera() async {
@@ -38,6 +46,12 @@ class _NotesState extends State<Notes> {
     setState(() {
       image = PickedFile(_userimage.path);
     });
+    if (image == null) {
+      print('Not selected');
+    } else {
+      print('File selected');
+      uploadimage();
+    }
   }
 
   uploadimage() async {
@@ -47,13 +61,17 @@ class _NotesState extends State<Notes> {
     TaskSnapshot uploadTask =
         await firebaseStorageRef.putFile(File(image.path));
     String url = await uploadTask.ref.getDownloadURL();
-    return url;
+
+    setState(() {
+      imageurl = url;
+    });
   }
 
   String title;
   String des;
   var currentDate = DateTime.now();
   TextEditingController titlecontroller = TextEditingController();
+  TextEditingController subtitlecontroller = TextEditingController();
   TextEditingController descontroller = TextEditingController();
   @override
   Widget build(BuildContext context) {
@@ -85,26 +103,24 @@ class _NotesState extends State<Notes> {
                                 backgroundColor: lightcolor,
                                 textColor: Colors.white,
                                 gravity: Toast.CENTER)
-                            : uploadimage().then((url) {
-                                FirebaseFirestore.instance
-                                    .collection('Users')
-                                    .doc(Onepad.sharedPreferences
-                                        .getString('uid'))
-                                    .collection('Notes')
-                                    .add({
-                                  'title': titlecontroller.text.toString(),
-                                  'description': descontroller.text.toString(),
-                                  'created':
-                                      '${currentDate.day} ${returnMonth(DateTime.now())}',
-                                  'image': url,
-                                }).whenComplete(() {
-                                  Toast.show(
-                                      "Your'e notes has been created", context,
-                                      duration: Toast.LENGTH_LONG,
-                                      backgroundColor: lightcolor,
-                                      textColor: Colors.white,
-                                      gravity: Toast.BOTTOM);
-                                });
+                            : FirebaseFirestore.instance
+                                .collection('Users')
+                                .doc(Onepad.sharedPreferences.getString('uid'))
+                                .collection('Notes')
+                                .add({
+                                'title': titlecontroller.text.toString(),
+                                'description': descontroller.text.toString(),
+                                'created':
+                                    '${currentDate.day} ${returnMonth(DateTime.now())} ',
+                                'time': DateTime.now().millisecondsSinceEpoch,
+                                'image': imageurl,
+                              }).whenComplete(() {
+                                Toast.show(
+                                    "Your'e notes has been created", context,
+                                    duration: Toast.LENGTH_LONG,
+                                    backgroundColor: lightcolor,
+                                    textColor: Colors.white,
+                                    gravity: Toast.BOTTOM);
                               });
                       },
                       icon: Icon(Icons.check),
@@ -114,7 +130,7 @@ class _NotesState extends State<Notes> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.all(20.0),
+                padding: const EdgeInsets.only(left: 20.0),
                 child: Form(
                   child: Column(
                     children: [
@@ -125,47 +141,73 @@ class _NotesState extends State<Notes> {
                           hintText: "Title",
                         ),
                         style: GoogleFonts.ubuntu(
-                            fontSize: 20,
+                            fontSize: 15,
                             color: Colors.black,
-                            letterSpacing: 1),
+                            letterSpacing: 0),
                         onChanged: (val) {
                           title = val;
                         },
                       ),
-                      image != null
-                          ? Container(
-                              height: MediaQuery.of(context).size.height / 1.5,
-                              width: MediaQuery.of(context).size.width / 2,
-                              decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                image: FileImage(File(image.path)),
-                              )),
-                            )
-                          : Container(
-                              height: MediaQuery.of(context).size.height * 0.75,
-                              padding: const EdgeInsets.only(top: 12.0),
-                              child: TextFormField(
-                                controller: descontroller,
-                                onChanged: (val) {
-                                  des = val;
-                                },
-                                maxLines: 20,
-                                cursorColor: darktextcolor,
-                                decoration: InputDecoration(
-                                  focusedBorder: UnderlineInputBorder(
-                                      borderSide: BorderSide(
-                                          color: Colors.transparent)),
-                                  enabledBorder: UnderlineInputBorder(
-                                      borderSide: BorderSide(
-                                          color: Colors.transparent)),
-                                  hintText: "Description",
-                                  hintStyle: GoogleFonts.ubuntu(
-                                      fontSize: 15,
-                                      color: Colors.black,
-                                      letterSpacing: 1),
-                                ),
+                      Container(
+                        child: Padding(
+                          padding: const EdgeInsets.only(top: 20.0),
+                          child: TextFormField(
+                              controller: subtitlecontroller,
+                              cursorColor: darktextcolor,
+                              decoration: InputDecoration.collapsed(
+                                hintText: 'SubTitle',
                               ),
-                            ),
+                              style: GoogleFonts.ubuntu(
+                                  fontSize: 15,
+                                  color: Colors.black,
+                                  letterSpacing: 0),
+                              onChanged: (val) {
+                                title = val;
+                              }),
+                        ),
+                      ),
+                      Container(
+                        height: MediaQuery.of(context).size.height * 0.25,
+                        padding: const EdgeInsets.only(top: 10.0),
+                        child: TextFormField(
+                          controller: descontroller,
+                          onChanged: (val) {
+                            des = val;
+                          },
+                          maxLines: 18,
+                          cursorColor: darktextcolor,
+                          decoration: InputDecoration(
+                            focusedBorder: UnderlineInputBorder(
+                                borderSide:
+                                    BorderSide(color: Colors.transparent)),
+                            enabledBorder: UnderlineInputBorder(
+                                borderSide:
+                                    BorderSide(color: Colors.transparent)),
+                            hintText: "Description",
+                            hintStyle: GoogleFonts.ubuntu(
+                                fontSize: 20,
+                                color: Colors.black,
+                                letterSpacing: 0),
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.15,
+                      ),
+                      image != null
+                          ? Padding(
+                              padding: const EdgeInsets.only(right: 20.0),
+                              child: Container(
+                                height: MediaQuery.of(context).size.height / 3,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(20),
+                                    image: DecorationImage(
+                                      image: FileImage(File(image.path)),
+                                      fit: BoxFit.cover,
+                                    )),
+                              ),
+                            )
+                          : Container()
                     ],
                   ),
                 ),
