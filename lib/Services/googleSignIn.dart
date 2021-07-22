@@ -29,4 +29,5 @@ class Authentication {
   Future<String> googleSignOut() async {
     await _googleSignIn.signOut();
   }
+  
 }
