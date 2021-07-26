@@ -171,7 +171,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                           : 2,
                                   overflow: TextOverflow.ellipsis,
                                   style: GoogleFonts.ubuntu(
-                                      letterSpacing: 0, fontSize: 15),
+                                      letterSpacing: 0, fontSize: 13),
                                 ),
                               ),
                             ),
