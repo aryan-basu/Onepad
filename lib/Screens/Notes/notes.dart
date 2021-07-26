@@ -78,189 +78,193 @@ class _NotesState extends State<Notes> {
     return SafeArea(
       child: Scaffold(
         resizeToAvoidBottomInset: false,
-        body: Container(
-          child: Column(
-            children: [
-              Container(
-                height: 60,
-                child: Row(
-                  children: [
-                    IconButton(
-                      onPressed: () {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (b) => HomeScreen()));
-                      },
-                      icon: Icon(Icons.arrow_back_ios),
-                      color: darkcolor,
-                      iconSize: 20,
-                    ),
-                    Spacer(),
-                    IconButton(
-                      onPressed: () {
-                        titlecontroller.text.isEmpty
-                            ? Toast.show("Give title for your'e note", context,
-                                duration: Toast.LENGTH_LONG,
-                                backgroundColor: lightcolor,
-                                textColor: Colors.white,
-                                gravity: Toast.CENTER)
-                            : FirebaseFirestore.instance
-                                .collection('Users')
-                                .doc(Onepad.sharedPreferences.getString('uid'))
-                                .collection('Notes')
-                                .add({
-                                'title': titlecontroller.text.toString(),
-                                'description': descontroller.text.toString(),
-                                'created':
-                                    '${currentDate.day} ${returnMonth(DateTime.now())} ',
-                                'time': DateTime.now().millisecondsSinceEpoch,
-                                'image': imageurl,
-                              }).whenComplete(() {
-                                Toast.show(
-                                    "Your'e notes has been created", context,
-                                    duration: Toast.LENGTH_LONG,
-                                    backgroundColor: lightcolor,
-                                    textColor: Colors.white,
-                                    gravity: Toast.BOTTOM);
-                              });
-                      },
-                      icon: Icon(Icons.check),
-                      color: Colors.green,
-                    )
-                  ],
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 20.0),
-                child: Form(
-                  child: Column(
+        body: SingleChildScrollView(
+          child: Container(
+            height: MediaQuery.of(context).size.height-30,
+            child: Column(
+              children: [
+                Container(
+                  height: 60,
+                  child: Row(
                     children: [
-                      TextFormField(
-                        controller: titlecontroller,
-                        cursorColor: darktextcolor,
-                        decoration: InputDecoration.collapsed(
-                          hintText: "Title",
-                        ),
-                        style: GoogleFonts.ubuntu(
-                            fontSize: 15,
-                            color: Colors.black,
-                            letterSpacing: 0),
-                        onChanged: (val) {
-                          title = val;
+                      IconButton(
+                        onPressed: () {
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (b) => HomeScreen()));
                         },
+                        icon: Icon(Icons.arrow_back_ios),
+                        color: darkcolor,
+                        iconSize: 20,
                       ),
-                      Container(
-                        child: Padding(
-                          padding: const EdgeInsets.only(top: 20.0),
+                      Spacer(),
+                      IconButton(
+                        onPressed: () {
+                          titlecontroller.text.isEmpty
+                              ? Toast.show("Give title for your'e note", context,
+                                  duration: Toast.LENGTH_LONG,
+                                  backgroundColor: lightcolor,
+                                  textColor: Colors.white,
+                                  gravity: Toast.CENTER)
+                              : FirebaseFirestore.instance
+                                  .collection('Users')
+                                  .doc(Onepad.sharedPreferences.getString('uid'))
+                                  .collection('Notes')
+                                  .add({
+                                  'title': titlecontroller.text.toString(),
+                                  'description': descontroller.text.toString(),
+                                  'created':
+                                      '${currentDate.day} ${returnMonth(DateTime.now())} ',
+                                  'time': DateTime.now().millisecondsSinceEpoch,
+                                  'image': imageurl,
+                                }).whenComplete(() {
+                                  Toast.show(
+                                      "Your'e notes has been created", context,
+                                      duration: Toast.LENGTH_LONG,
+                                      backgroundColor: lightcolor,
+                                      textColor: Colors.white,
+                                      gravity: Toast.BOTTOM);
+                                });
+                                Navigator.pop(context);
+                        },
+                        icon: Icon(Icons.check),
+                        color: Colors.green,
+                      )
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 20.0),
+                  child: Form(
+                    child: Column(
+                      children: [
+                        TextFormField(
+                          controller: titlecontroller,
+                          cursorColor: darktextcolor,
+                          decoration: InputDecoration.collapsed(
+                            hintText: "Title",
+                          ),
+                          style: GoogleFonts.ubuntu(
+                              fontSize: 15,
+                              color: Colors.black,
+                              letterSpacing: 0),
+                          onChanged: (val) {
+                            title = val;
+                          },
+                        ),
+                        Container(
+                          child: Padding(
+                            padding: const EdgeInsets.only(top: 20.0),
+                            child: TextFormField(
+                                controller: subtitlecontroller,
+                                cursorColor: darktextcolor,
+                                decoration: InputDecoration.collapsed(
+                                  hintText: 'SubTitle',
+                                ),
+                                style: GoogleFonts.ubuntu(
+                                    fontSize: 15,
+                                    color: Colors.black,
+                                    letterSpacing: 0),
+                                onChanged: (val) {
+                                  title = val;
+                                }),
+                          ),
+                        ),
+                        Container(
+                          height: MediaQuery.of(context).size.height * 0.25,
+                          padding: const EdgeInsets.only(top: 10.0),
                           child: TextFormField(
-                              controller: subtitlecontroller,
-                              cursorColor: darktextcolor,
-                              decoration: InputDecoration.collapsed(
-                                hintText: 'SubTitle',
-                              ),
-                              style: GoogleFonts.ubuntu(
-                                  fontSize: 15,
+                            controller: descontroller,
+                            onChanged: (val) {
+                              des = val;
+                            },
+                            maxLines: 18,
+                            cursorColor: darktextcolor,
+                            decoration: InputDecoration(
+                              focusedBorder: UnderlineInputBorder(
+                                  borderSide:
+                                      BorderSide(color: Colors.transparent)),
+                              enabledBorder: UnderlineInputBorder(
+                                  borderSide:
+                                      BorderSide(color: Colors.transparent)),
+                              hintText: "Description",
+                              hintStyle: GoogleFonts.ubuntu(
+                                  fontSize: 20,
                                   color: Colors.black,
                                   letterSpacing: 0),
-                              onChanged: (val) {
-                                title = val;
-                              }),
-                        ),
-                      ),
-                      Container(
-                        height: MediaQuery.of(context).size.height * 0.25,
-                        padding: const EdgeInsets.only(top: 10.0),
-                        child: TextFormField(
-                          controller: descontroller,
-                          onChanged: (val) {
-                            des = val;
-                          },
-                          maxLines: 18,
-                          cursorColor: darktextcolor,
-                          decoration: InputDecoration(
-                            focusedBorder: UnderlineInputBorder(
-                                borderSide:
-                                    BorderSide(color: Colors.transparent)),
-                            enabledBorder: UnderlineInputBorder(
-                                borderSide:
-                                    BorderSide(color: Colors.transparent)),
-                            hintText: "Description",
-                            hintStyle: GoogleFonts.ubuntu(
-                                fontSize: 20,
-                                color: Colors.black,
-                                letterSpacing: 0),
+                            ),
                           ),
                         ),
-                      ),
-                      SizedBox(
-                        height: MediaQuery.of(context).size.height * 0.15,
-                      ),
-                      image != null
-                          ? Padding(
-                              padding: const EdgeInsets.only(right: 20.0),
-                              child: Container(
-                                height: MediaQuery.of(context).size.height / 3,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(20),
-                                    image: DecorationImage(
-                                      image: FileImage(File(image.path)),
-                                      fit: BoxFit.cover,
-                                    )),
-                              ),
-                            )
-                          : Container()
-                    ],
-                  ),
-                ),
-              ),
-              Flexible(
-                child: Container(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(left: 30.0, right: 30),
-                        child: Container(
-                          height: 60,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(40),
-                              color: lightcolor.withOpacity(0.5)),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              IconButton(
-                                onPressed: () {
-                                  gallery();
-                                },
-                                icon: Icon(Icons.image),
-                                color: darkcolor,
-                                iconSize: 25,
-                              ),
-                              IconButton(
-                                onPressed: () {},
-                                icon: Icon(Icons.settings_voice),
-                                color: darkcolor,
-                                iconSize: 25,
-                              ),
-                              IconButton(
-                                onPressed: () {
-                                  camera();
-                                },
-                                icon: Icon(FontAwesomeIcons.camera),
-                                color: darkcolor,
-                                iconSize: 25,
+                        SizedBox(
+                          height: MediaQuery.of(context).size.height * 0.15,
+                        ),
+                        image != null
+                            ? Padding(
+                                padding: const EdgeInsets.only(right: 20.0),
+                                child: Container(
+                                  height: MediaQuery.of(context).size.height / 4,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(20),
+                                      image: DecorationImage(
+                                        image: FileImage(File(image.path)),
+                                        fit: BoxFit.cover,
+                                      )),
+                                ),
                               )
-                            ],
-                          ),
-                        ),
-                      ),
-                    ],
+                            : Container()
+                      ],
+                    ),
                   ),
                 ),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-            ],
+                Flexible(
+                  child: Container(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(left: 30.0, right: 30),
+                          child: Container(
+                            height: 60,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(40),
+                                color: lightcolor.withOpacity(0.5)),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                IconButton(
+                                  onPressed: () {
+                                    gallery();
+                                  },
+                                  icon: Icon(Icons.image),
+                                  color: darkcolor,
+                                  iconSize: 25,
+                                ),
+                                IconButton(
+                                  onPressed: () {},
+                                  icon: Icon(Icons.settings_voice),
+                                  color: darkcolor,
+                                  iconSize: 25,
+                                ),
+                                IconButton(
+                                  onPressed: () {
+                                    camera();
+                                  },
+                                  icon: Icon(FontAwesomeIcons.camera),
+                                  color: darkcolor,
+                                  iconSize: 25,
+                                )
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+              ],
+            ),
           ),
         ),
       ),
