@@ -312,16 +312,29 @@ class _SignInScreenState extends State<SignInScreen> {
                           GestureDetector(
                             onTap: () {
                               _googleSignin().whenComplete(() {
-                                Onepad.sharedPreferences.getString('email') !=
-                                        null
-                                    ? Navigator.pushReplacement(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (b) => HomeScreen()))
-                                    : Navigator.pushReplacement(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (b) => SignInScreen()));
+                                FirebaseFirestore.instance
+                                    .collection('Users')
+                                    .doc(Onepad.sharedPreferences
+                                        .getString('uid'))
+                                    .set({
+                                  "uid":
+                                      Onepad.sharedPreferences.getString('uid'),
+                                  "email": Onepad.sharedPreferences
+                                      .getString('email'),
+                                  "username": Onepad.sharedPreferences
+                                      .getString('username'),
+                                }).whenComplete(() {
+                                  Onepad.sharedPreferences.getString('email') !=
+                                          null
+                                      ? Navigator.pushReplacement(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (b) => HomeScreen()))
+                                      : Navigator.pushReplacement(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (b) => SignInScreen()));
+                                });
                               });
                             },
                             child: Container(
@@ -335,10 +348,29 @@ class _SignInScreenState extends State<SignInScreen> {
                           GestureDetector(
                             onTap: () {
                               _login().whenComplete(() {
-                                Navigator.pushReplacement(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (b) => HomeScreen()));
+                                FirebaseFirestore.instance
+                                    .collection('Users')
+                                    .doc(Onepad.sharedPreferences
+                                        .getString('uid'))
+                                    .set({
+                                  "uid":
+                                      Onepad.sharedPreferences.getString('uid'),
+                                  "email": Onepad.sharedPreferences
+                                      .getString('email'),
+                                  "username": Onepad.sharedPreferences
+                                      .getString('username'),
+                                }).whenComplete(() {
+                                  Onepad.sharedPreferences.getString('email') !=
+                                          null
+                                      ? Navigator.pushReplacement(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (b) => HomeScreen()))
+                                      : Navigator.pushReplacement(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (b) => SignInScreen()));
+                                });
                               });
                             },
                             child: Image.network(

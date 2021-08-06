@@ -80,7 +80,7 @@ class _NotesState extends State<Notes> {
         resizeToAvoidBottomInset: false,
         body: SingleChildScrollView(
           child: Container(
-            height: MediaQuery.of(context).size.height-30,
+            height: MediaQuery.of(context).size.height - 30,
             child: Column(
               children: [
                 Container(
@@ -100,18 +100,22 @@ class _NotesState extends State<Notes> {
                       IconButton(
                         onPressed: () {
                           titlecontroller.text.isEmpty
-                              ? Toast.show("Give title for your'e note", context,
+                              ? Toast.show(
+                                  "Give title for your'e note", context,
                                   duration: Toast.LENGTH_LONG,
                                   backgroundColor: lightcolor,
                                   textColor: Colors.white,
                                   gravity: Toast.CENTER)
                               : FirebaseFirestore.instance
                                   .collection('Users')
-                                  .doc(Onepad.sharedPreferences.getString('uid'))
-                                  .collection('Notes')
-                                  .add({
+                                  .doc(
+                                      Onepad.sharedPreferences.getString('uid'))
+                                  .collection('Notes').doc(Onepad.sharedPreferences.getString('uid'))
+                                  .set({
                                   'title': titlecontroller.text.toString(),
                                   'description': descontroller.text.toString(),
+                                  'subtitle':
+                                      subtitlecontroller.text.toString(),
                                   'created':
                                       '${currentDate.day} ${returnMonth(DateTime.now())} ',
                                   'time': DateTime.now().millisecondsSinceEpoch,
@@ -124,7 +128,7 @@ class _NotesState extends State<Notes> {
                                       textColor: Colors.white,
                                       gravity: Toast.BOTTOM);
                                 });
-                                Navigator.pop(context);
+                          Navigator.pop(context);
                         },
                         icon: Icon(Icons.check),
                         color: Colors.green,
@@ -201,7 +205,8 @@ class _NotesState extends State<Notes> {
                             ? Padding(
                                 padding: const EdgeInsets.only(right: 20.0),
                                 child: Container(
-                                  height: MediaQuery.of(context).size.height / 4,
+                                  height:
+                                      MediaQuery.of(context).size.height / 4,
                                   decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(20),
                                       image: DecorationImage(

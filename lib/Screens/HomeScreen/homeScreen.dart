@@ -6,6 +6,7 @@ import 'package:onepad/Helpers/colorhelper.dart';
 import 'package:onepad/Helpers/helpers.dart';
 import 'package:onepad/Screens/Account/account.dart';
 import 'package:onepad/Screens/DetailScreen/detailScreen.dart';
+import 'package:onepad/Screens/HomeScreen/notes_visible.dart';
 import 'package:onepad/Screens/Notes/notes.dart';
 import 'package:onepad/Services/const.dart';
 
@@ -20,6 +21,7 @@ class _HomeScreenState extends State<HomeScreen> {
   final random = Random();
   String username = Onepad.sharedPreferences.getString('username');
   int _currentindex = 0;
+  List<Widget> options = <Widget>[NotesVisible(), Account()];
 
   void itemtap(int index) {
     setState(() {
@@ -72,7 +74,11 @@ class _HomeScreenState extends State<HomeScreen> {
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
               icon: IconButton(
-                  onPressed: () {}, icon: Icon(Icons.widgets_outlined)),
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (b) => NotesVisible()));
+                  },
+                  icon: Icon(Icons.widgets_outlined)),
               title: Helper.text('', 15, 0, Colors.black)),
           BottomNavigationBarItem(
               icon: IconButton(
@@ -87,100 +93,10 @@ class _HomeScreenState extends State<HomeScreen> {
         onTap: itemtap,
       ),
       body: Container(
-        height: MediaQuery.of(context).size.height,
-        width: 400,
-        child: StreamBuilder<QuerySnapshot>(
-            stream: FirebaseFirestore.instance
-                .collection('Users')
-                .doc(Onepad.sharedPreferences.getString('uid'))
-                .collection('Notes')
-                .orderBy('time')
-                .snapshots(),
-            builder: (context, snapshot) {
-              if (!snapshot.hasData) {
-                return Center(child: CircularProgressIndicator());
-              }
-              return Padding(
-                padding: const EdgeInsets.only(left: 20.0, top: 50),
-                child: GridView.builder(
-                    itemCount: snapshot.data.docs.length,
-                    gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-                      maxCrossAxisExtent: 200,
-                      crossAxisSpacing: 20,
-                      mainAxisSpacing: 20,
-                    ),
-                    itemBuilder: (BuildContext context, int index) {
-                      return Container(
-                        height: 300,
-                        width: 300,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                            color: Color.fromARGB(
-                                    random.nextInt(245),
-                                    random.nextInt(245),
-                                    random.nextInt(245),
-                                    random.nextInt(245))
-                                .withOpacity(0.1)),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            SizedBox(
-                              height: 5,
-                            ),
-                            snapshot.data.docs[index]['image'] == ""
-                                ? SizedBox()
-                                : GestureDetector(
-                                    onTap: () {
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (b) => DetailScreen()));
-                                    },
-                                    child: Container(
-                                      height: 100,
-                                      width: 100,
-                                      decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(20),
-                                          image: DecorationImage(
-                                              image: NetworkImage(snapshot
-                                                  .data.docs[index]['image']),
-                                              fit: BoxFit.cover)),
-                                    ),
-                                  ),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            Helper.text(snapshot.data.docs[index]['title'], 15,
-                                0, darkcolor),
-                            Container(
-                              child: Padding(
-                                padding:
-                                    snapshot.data.docs[index]['image'] == ""
-                                        ? const EdgeInsets.only(
-                                            top: 5,
-                                            left: 20,
-                                            right: 20,
-                                            bottom: 10)
-                                        : const EdgeInsets.all(8.0),
-                                child: Text(
-                                  snapshot.data.docs[index]['description'],
-                                  maxLines:
-                                      snapshot.data.docs[index]['image'] == ""
-                                          ? 7
-                                          : 2,
-                                  overflow: TextOverflow.ellipsis,
-                                  style: GoogleFonts.ubuntu(
-                                      letterSpacing: 0, fontSize: 13),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      );
-                    }),
-              );
-            }),
+        decoration: BoxDecoration(),
+        child: Center(
+          child: options.elementAt(_currentindex),
+        ),
       ),
     );
   }
