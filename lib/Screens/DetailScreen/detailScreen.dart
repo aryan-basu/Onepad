@@ -1,15 +1,9 @@
-import 'dart:io';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:onepad/Services/const.dart';
-import 'package:path/path.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:onepad/Helpers/colorhelper.dart';
-import 'package:onepad/Helpers/helpers.dart';
 import 'package:onepad/Screens/HomeScreen/homeScreen.dart';
 
 class DetailScreen extends StatefulWidget {
@@ -76,21 +70,39 @@ class _DetailScreenState extends State<DetailScreen> {
                               .collection('Users')
                               .doc(Onepad.sharedPreferences.getString('uid'))
                               .collection('Notes')
-                              .doc(Onepad.sharedPreferences.getString('uid'))
+                              .doc(widget.onepad['id'])
                               .update({
-                            'title': title.toString(),
-                            'subtitle': subtitle.toString(),
-                            'description': des.toString(),
+                            'title': title.toString() == null
+                                ? widget.onepad['title']
+                                : title.toString(),
+                            'subtitle': subtitle.toString() == null
+                                ? widget.onepad['subtitle']
+                                : subtitle.toString(),
+                            'description': des.toString() == null
+                                ? widget.onepad['description']
+                                : des.toString(),
                             'created':
                                 '${currentDate.day} ${returnMonth(DateTime.now())} ',
                             'time': DateTime.now().millisecondsSinceEpoch,
+                          }).whenComplete(() {
+                            Navigator.pop(context);
                           });
                         },
                         icon: Icon(Icons.edit),
                         color: Colors.red,
                       ),
                       IconButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          FirebaseFirestore.instance
+                              .collection('Users')
+                              .doc(Onepad.sharedPreferences.getString('uid'))
+                              .collection('Notes')
+                              .doc(widget.onepad['id'])
+                              .delete()
+                              .whenComplete(() {
+                            Navigator.pop(context);
+                          });
+                        },
                         icon: Icon(Icons.delete),
                         color: Colors.red,
                       ),
