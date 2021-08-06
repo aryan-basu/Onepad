@@ -26,7 +26,7 @@ class _NotesVisibleState extends State<NotesVisible> {
                 .collection('Users')
                 .doc(Onepad.sharedPreferences.getString('uid'))
                 .collection('Notes')
-                // .orderBy('time')
+                .orderBy('time')
                 .snapshots(),
             builder: (context, snapshot) {
               if (snapshot.data != null && snapshot.data.docs.length != 0) {

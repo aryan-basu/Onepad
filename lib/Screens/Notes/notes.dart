@@ -23,6 +23,8 @@ class _NotesState extends State<Notes> {
     return new DateFormat.MMMM().format(DateTime.now());
   }
 
+  DateTime id = DateTime.now();
+
   PickedFile image;
   String imageurl = "";
 
@@ -111,8 +113,7 @@ class _NotesState extends State<Notes> {
                                   .doc(
                                       Onepad.sharedPreferences.getString('uid'))
                                   .collection('Notes')
-                                  .doc(
-                                      Onepad.sharedPreferences.getString('uid'))
+                                  .doc(id.toString())
                                   .set({
                                   'title': titlecontroller.text.toString(),
                                   'description': descontroller.text.toString(),
@@ -122,6 +123,7 @@ class _NotesState extends State<Notes> {
                                       '${currentDate.day} ${returnMonth(DateTime.now())} ',
                                   'time': DateTime.now().millisecondsSinceEpoch,
                                   'image': imageurl,
+                                  'id': id.toString()
                                 }).whenComplete(() {
                                   Toast.show(
                                       "Your'e notes has been created", context,
