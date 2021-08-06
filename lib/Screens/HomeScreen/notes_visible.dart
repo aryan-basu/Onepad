@@ -49,7 +49,7 @@ class _NotesVisibleState extends State<NotesVisible> {
                                 context,
                                 MaterialPageRoute(
                                     builder: (b) => DetailScreen(
-                                         onepad: snapshot.data.docs[index],
+                                          onepad: snapshot.data.docs[index],
                                         )));
                           },
                           child: Container(
@@ -67,17 +67,16 @@ class _NotesVisibleState extends State<NotesVisible> {
                                 snapshot.data.docs[index]['image'] == ""
                                     ? SizedBox()
                                     : Container(
-                                      height: 100,
-                                      width: 100,
-                                      decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(20),
-                                          image: DecorationImage(
-                                              image: NetworkImage(snapshot
-                                                  .data
-                                                  .docs[index]['image']),
-                                              fit: BoxFit.cover)),
-                                    ),
+                                        height: 100,
+                                        width: 100,
+                                        decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(20),
+                                            image: DecorationImage(
+                                                image: NetworkImage(snapshot
+                                                    .data.docs[index]['image']),
+                                                fit: BoxFit.cover)),
+                                      ),
                                 SizedBox(
                                   height: 10,
                                 ),
@@ -94,7 +93,13 @@ class _NotesVisibleState extends State<NotesVisible> {
                                                 bottom: 10)
                                             : const EdgeInsets.only(left: 10.0),
                                     child: Text(
-                                      snapshot.data.docs[index]['description'],
+                                      snapshot.data.docs[index]
+                                                  ['description'] ==
+                                              null
+                                          ? Helper.subtext('No description', 20,
+                                              0, Colors.black)
+                                          : snapshot.data.docs[index]
+                                              ['description'],
                                       maxLines: snapshot.data.docs[index]
                                                   ['image'] ==
                                               ""

@@ -110,7 +110,9 @@ class _NotesState extends State<Notes> {
                                   .collection('Users')
                                   .doc(
                                       Onepad.sharedPreferences.getString('uid'))
-                                  .collection('Notes').doc(Onepad.sharedPreferences.getString('uid'))
+                                  .collection('Notes')
+                                  .doc(
+                                      Onepad.sharedPreferences.getString('uid'))
                                   .set({
                                   'title': titlecontroller.text.toString(),
                                   'description': descontroller.text.toString(),
