@@ -73,20 +73,10 @@ class _HomeScreenState extends State<HomeScreen> {
         unselectedItemColor: darkcolor,
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-              icon: IconButton(
-                  onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (b) => NotesVisible()));
-                  },
-                  icon: Icon(Icons.widgets_outlined)),
+              icon: Icon(Icons.widgets_outlined),
               title: Helper.text('', 15, 0, Colors.black)),
           BottomNavigationBarItem(
-              icon: IconButton(
-                  onPressed: () {
-                    Navigator.push(
-                        context, MaterialPageRoute(builder: (b) => Account()));
-                  },
-                  icon: Icon(Icons.person)),
+              icon: Icon(Icons.person),
               title: Helper.text('', 15, 0, Colors.black)),
         ],
         currentIndex: _currentindex,
