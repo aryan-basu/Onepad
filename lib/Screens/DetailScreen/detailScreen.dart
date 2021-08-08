@@ -145,8 +145,8 @@ class _DetailScreenState extends State<DetailScreen> {
                           ),
                         ),
                         Container(
-                          height: MediaQuery.of(context).size.height * 0.25,
-                          padding: const EdgeInsets.only(top: 10.0),
+                          height: MediaQuery.of(context).size.height /3,
+                          padding: const EdgeInsets.only(top: 20.0),
                           child: TextFormField(
                             controller: descontroller,
                             onChanged: (val) {
@@ -170,7 +170,7 @@ class _DetailScreenState extends State<DetailScreen> {
                           ),
                         ),
                         SizedBox(
-                          height: MediaQuery.of(context).size.height * 0.15,
+                          height: 20,
                         ),
                         widget.onepad['image'] == null
                             ? SizedBox()
@@ -178,14 +178,13 @@ class _DetailScreenState extends State<DetailScreen> {
                                 padding: const EdgeInsets.only(right: 20.0),
                                 child: Container(
                                   height:
-                                      MediaQuery.of(context).size.height / 4,
+                                      MediaQuery.of(context).size.height / 2.5,
                                   decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(20),
                                       image: DecorationImage(
-                                        image: NetworkImage(
-                                            widget.onepad['image']),
-                                        fit:BoxFit.fitHeight
-                                      )),
+                                          image: NetworkImage(
+                                              widget.onepad['image']),
+                                          fit: BoxFit.fitHeight)),
                                 ),
                               ),
                       ],
