@@ -79,10 +79,10 @@ class _NotesState extends State<Notes> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        resizeToAvoidBottomInset: false,
+        resizeToAvoidBottomInset: true,
         body: SingleChildScrollView(
           child: Container(
-            height: MediaQuery.of(context).size.height - 30,
+            height: MediaQuery.of(context).size.height,
             child: Column(
               children: [
                 Container(
@@ -202,20 +202,17 @@ class _NotesState extends State<Notes> {
                             ),
                           ),
                         ),
-                        SizedBox(
-                          height: MediaQuery.of(context).size.height * 0.15,
-                        ),
                         image != null
                             ? Padding(
-                                padding: const EdgeInsets.only(right: 20.0),
+                                padding: const EdgeInsets.only(top:20,right: 20.0,bottom: 0),
                                 child: Container(
                                   height:
-                                      MediaQuery.of(context).size.height / 4,
+                                      MediaQuery.of(context).size.height / 2.5,
                                   decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(20),
                                       image: DecorationImage(
                                         image: FileImage(File(image.path)),
-                                        fit: BoxFit.cover,
+                                        fit: BoxFit.fitHeight,
                                       )),
                                 ),
                               )
@@ -230,7 +227,7 @@ class _NotesState extends State<Notes> {
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         Padding(
-                          padding: const EdgeInsets.only(left: 30.0, right: 30),
+                          padding: const EdgeInsets.only(top:0,left: 30.0, right: 30),
                           child: Container(
                             height: 60,
                             decoration: BoxDecoration(
@@ -269,9 +266,7 @@ class _NotesState extends State<Notes> {
                     ),
                   ),
                 ),
-                SizedBox(
-                  height: 10,
-                ),
+                
               ],
             ),
           ),

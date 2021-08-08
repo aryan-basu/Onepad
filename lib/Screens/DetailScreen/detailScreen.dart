@@ -184,7 +184,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                       image: DecorationImage(
                                         image: NetworkImage(
                                             widget.onepad['image']),
-                                        fit: BoxFit.cover,
+                                        fit:BoxFit.fitHeight
                                       )),
                                 ),
                               ),
