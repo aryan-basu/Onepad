@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:onepad/Helpers/colorhelper.dart';
 import 'package:onepad/Helpers/helpers.dart';
 import 'package:onepad/Screens/SingupScreen/SignupScreen.dart';
@@ -19,17 +20,17 @@ class _OnboardScreenState extends State<OnboardScreen> {
   final List<Map<String, String>> splashData = [
     {
       "title": "Welcome to Onepad",
-      "subtitle": "Make your'e first note ",
+      "subtitle": "Write your first note ",
       "image": "assets/images/Onboard1.png"
     },
     {
       "title": "Save Images",
-      "subtitle": "Upload your'e favourite images ",
+      "subtitle": "Upload your favourite images",
       "image": "assets/images/Onboard2.png"
     },
     {
-      "title": "Voice notes",
-      "subtitle": "Lazy to write just speak",
+      "title": "Voice Notes",
+      "subtitle": "In a hurry? Just speak!",
       "image": "assets/images/Onboard3.png"
     },
   ];
@@ -53,7 +54,6 @@ class _OnboardScreenState extends State<OnboardScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: background,
       body: SafeArea(
         child: Column(
           children: [
@@ -66,34 +66,26 @@ class _OnboardScreenState extends State<OnboardScreen> {
                     SizedBox(
                       height: MediaQuery.of(context).size.height / 8,
                     ),
-                    // Spacer(flex: 1),
+                    Container(
+                        height: MediaQuery.of(context).size.height / 3,
+                        child: Image.asset('${(splashData[index]['image'])}')),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height / 12,
+                    ),
                     Padding(
                       padding: EdgeInsets.only(bottom: 10),
-                      child: Helper.text("${(splashData[index]['title'])}", 20,
-                          0, Colors.black),
+                      child:
+                          Helper.text("${(splashData[index]['title'])}", 20, 0),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(bottom: 8.0),
                       child: Container(
                         constraints: BoxConstraints(
                             maxWidth: MediaQuery.of(context).size.width - 100),
-                        child: Helper.text("${(splashData[index]['subtitle'])}",
-                            18, 0, Colors.grey),
+                        child: Helper.text(
+                            "${(splashData[index]['subtitle'])}", 18, 0),
                       ),
                     ),
-                    SizedBox(
-                      height: MediaQuery.of(context).size.height / 12,
-                    ),
-                    Container(
-                        height: MediaQuery.of(context).size.height / 3,
-                        child: Image.asset('${(splashData[index]['image'])}')),
-                    // Spacer(flex: 1),
-                    // AspectRatio(
-                    //   aspectRatio: 16 / 9,
-                    //   child: Image.asset('${(splashData[index]['image'])}',
-                    //       fit: BoxFit.contain),
-                    // ),
-                    // Spacer(),
                   ]);
                 },
                 onPageChanged: (value) => setState(() {
@@ -130,8 +122,13 @@ class _OnboardScreenState extends State<OnboardScreen> {
                                   },
                                   child: Container(
                                     child: Center(
-                                      child: Helper.subtext(
-                                          'Skip', 14, 0, lighttextcolor),
+                                      child: Text(
+                                        'Skip',
+                                        style: GoogleFonts.ubuntu(
+                                            color: Colors.white,
+                                            fontSize: 14,
+                                            letterSpacing: 0),
+                                      ),
                                     ),
                                     height: 40,
                                     width: 100,
@@ -155,8 +152,7 @@ class _OnboardScreenState extends State<OnboardScreen> {
                                   },
                                   child: Container(
                                     child: Center(
-                                      child: Helper.subtext(
-                                          'Continue', 14, 0, darkcolor),
+                                      child: Helper.subtext('Continue', 14, 0),
                                     ),
                                     height: 50,
                                     width: 100,
@@ -179,9 +175,11 @@ class _OnboardScreenState extends State<OnboardScreen> {
                             },
                             child: Container(
                               child: Center(
-                                child: Helper.subtext(
-                                    'Get Started', 14, 0, lighttextcolor),
-                              ),
+                                  child: Text('Get Started',
+                                      style: GoogleFonts.ubuntu(
+                                          color: Colors.white,
+                                          fontSize: 14,
+                                          letterSpacing: 0))),
                               height: 50,
                               width: 300,
                               decoration: BoxDecoration(

@@ -102,8 +102,7 @@ class _NotesState extends State<Notes> {
                       IconButton(
                         onPressed: () {
                           titlecontroller.text.isEmpty
-                              ? Toast.show(
-                                  "Give title for your'e note", context,
+                              ? Toast.show("Give title to your note", context,
                                   duration: Toast.LENGTH_LONG,
                                   backgroundColor: lightcolor,
                                   textColor: Colors.white,
@@ -126,7 +125,7 @@ class _NotesState extends State<Notes> {
                                   'id': id.toString()
                                 }).whenComplete(() {
                                   Toast.show(
-                                      "Your'e notes has been created", context,
+                                      "Your note has been created!", context,
                                       duration: Toast.LENGTH_LONG,
                                       backgroundColor: lightcolor,
                                       textColor: Colors.white,
@@ -152,9 +151,7 @@ class _NotesState extends State<Notes> {
                             hintText: "Title",
                           ),
                           style: GoogleFonts.ubuntu(
-                              fontSize: 15,
-                              color: Colors.black,
-                              letterSpacing: 0),
+                              fontSize: 15, letterSpacing: 0),
                           onChanged: (val) {
                             title = val;
                           },
@@ -169,9 +166,7 @@ class _NotesState extends State<Notes> {
                                   hintText: 'SubTitle',
                                 ),
                                 style: GoogleFonts.ubuntu(
-                                    fontSize: 15,
-                                    color: Colors.black,
-                                    letterSpacing: 0),
+                                    fontSize: 15, letterSpacing: 0),
                                 onChanged: (val) {
                                   title = val;
                                 }),
@@ -196,9 +191,7 @@ class _NotesState extends State<Notes> {
                                       BorderSide(color: Colors.transparent)),
                               hintText: "Description",
                               hintStyle: GoogleFonts.ubuntu(
-                                  fontSize: 20,
-                                  color: Colors.black,
-                                  letterSpacing: 0),
+                                  fontSize: 20, letterSpacing: 0),
                             ),
                           ),
                         ),

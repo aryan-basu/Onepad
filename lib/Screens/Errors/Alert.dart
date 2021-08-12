@@ -15,8 +15,8 @@ class AlertErrorDialog extends StatelessWidget {
       actions: <Widget>[
         RaisedButton(
           onPressed: () {
-            Navigator.pushReplacement(context,
-                MaterialPageRoute(builder: (b)=>SignUpScreen()));
+            Navigator.pushReplacement(
+                context, MaterialPageRoute(builder: (b) => SignUpScreen()));
           },
           child: Center(
             child: Text('OK'),

@@ -1,11 +1,8 @@
 import 'dart:math';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:onepad/Helpers/colorhelper.dart';
 import 'package:onepad/Helpers/helpers.dart';
 import 'package:onepad/Screens/Account/account.dart';
-import 'package:onepad/Screens/DetailScreen/detailScreen.dart';
 import 'package:onepad/Screens/HomeScreen/notes_visible.dart';
 import 'package:onepad/Screens/Notes/notes.dart';
 import 'package:onepad/Services/const.dart';
@@ -32,14 +29,11 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: background,
       appBar: new PreferredSize(
           preferredSize: Size(MediaQuery.of(context).size.width,
               MediaQuery.of(context).size.height),
           child: Container(
-            decoration: BoxDecoration(
-              color: background,
-            ),
+            decoration: BoxDecoration(),
             padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
             child: Row(
               children: [
@@ -50,8 +44,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             ? 'Hello '
                             : 'Hello ' + username + " !",
                         20,
-                        0,
-                        darktextcolor)),
+                        0)),
                 Spacer(),
                 Container(
                     height: 30,
@@ -69,15 +62,15 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Icon(Icons.add),
       ),
       bottomNavigationBar: BottomNavigationBar(
-        selectedItemColor: darkcolor,
-        unselectedItemColor: darkcolor,
+        selectedItemColor: lightcolor,
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
               icon: Icon(Icons.widgets_outlined),
-              title: Helper.text('', 15, 0, Colors.black)),
+
+              title: Helper.text('', 15, 0)),
           BottomNavigationBarItem(
-              icon: Icon(Icons.person),
-              title: Helper.text('', 15, 0, Colors.black)),
+              icon: Icon(Icons.person), title: Helper.text('', 15, 0)),
+
         ],
         currentIndex: _currentindex,
         onTap: itemtap,

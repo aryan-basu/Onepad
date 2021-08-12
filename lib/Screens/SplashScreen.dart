@@ -1,8 +1,5 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
-
-import 'package:onepad/Helpers/colorhelper.dart';
 import 'package:onepad/Screens/HomeScreen/homeScreen.dart';
 import 'package:onepad/Screens/Onboarding/Onboarding.dart';
 import 'package:onepad/Services/const.dart';
@@ -14,10 +11,12 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   String uid = Onepad.sharedPreferences.getString('uid');
+
+  get brightness => null;
   @override
   void initState() {
     Timer(
-        Duration(seconds: 2),
+        Duration(seconds: 5),
         () => Navigator.pushReplacement(
             context,
             MaterialPageRoute(
@@ -28,16 +27,23 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: background,
+        backgroundColor:
+            MediaQuery.of(context).platformBrightness == Brightness.dark
+                ? Colors.black
+                : Colors.white,
         body: SafeArea(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Container(
                 alignment: Alignment.center,
-                height: MediaQuery.of(context).size.height / 3,
+                height: MediaQuery.of(context).size.height / 1.5,
                 child:
-                    Image.asset('assets/images/Splash.gif', fit: BoxFit.cover),
+                    MediaQuery.of(context).platformBrightness == Brightness.dark
+                        ? Image.asset('assets/images/splash2.gif',
+                            fit: BoxFit.cover)
+                        : Image.asset('assets/images/Splash.gif',
+                            fit: BoxFit.cover),
               ),
               SizedBox(
                 height: 20,
