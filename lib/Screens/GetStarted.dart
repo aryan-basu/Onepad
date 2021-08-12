@@ -1,16 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:onepad/Helpers/colorhelper.dart';
 import 'package:onepad/Helpers/helpers.dart';
-import 'package:onepad/Screens/SignInScreen/SignInScreen.dart';
-
 import 'SingupScreen/SignupScreen.dart';
 
 class GetStarted extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: background,
         body: SafeArea(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -24,11 +20,11 @@ class GetStarted extends StatelessWidget {
           SizedBox(
             height: 20,
           ),
-          Helper.text("Welcome to Onepad!", 18, 1, darktextcolor),
+          Helper.text("Welcome to Onepad!", 18, 1),
           SizedBox(
             height: 10,
           ),
-          Helper.subtext("Read | Write | Repeat", 10, 1, darkcolor),
+          Helper.subtext("Write | Read | Repeat", 10, 1),
           SizedBox(
             height: MediaQuery.of(context).size.height / 2.5,
           ),

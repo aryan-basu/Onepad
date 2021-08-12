@@ -5,7 +5,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:onepad/Helpers/colorhelper.dart';
 import 'package:onepad/Helpers/helpers.dart';
 import 'package:onepad/Screens/Errors/Alert.dart';
-import 'package:onepad/Screens/HomeScreen/homeScreen.dart';
 import 'package:onepad/Screens/Info/Gettinginfo.dart';
 import 'package:onepad/Screens/SignInScreen/SignInScreen.dart';
 import 'package:onepad/Services/const.dart';
@@ -79,7 +78,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: background,
+      // backgroundColor: background,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Container(
@@ -116,8 +115,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 color: darkcolor,
                               ),
                               hintText: 'Username',
-                              hintStyle:
-                                  GoogleFonts.ubuntu(color: darktextcolor),
+                              // hintStyle:
+                              //     GoogleFonts.ubuntu(color: darktextcolor),
                               enabledBorder: OutlineInputBorder(
                                   borderSide:
                                       BorderSide(color: Colors.transparent)),
@@ -140,10 +139,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                           r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
                                       .hasMatch(val)
                                   ? null
-                                  : "Please provide a valid email";
+                                  : "Please provide a valid email address";
                             },
                             controller: emailcontroller,
-                            style: GoogleFonts.ubuntu(color: darktextcolor),
+                            //       style: GoogleFonts.ubuntu(color: darktextcolor),
                             decoration: InputDecoration(
                                 prefixIcon: Icon(
                                   Icons.email,
@@ -151,8 +150,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   size: 15,
                                 ),
                                 hintText: 'Email',
-                                hintStyle:
-                                    GoogleFonts.ubuntu(color: darktextcolor),
+                                // hintStyle:
+                                //     GoogleFonts.ubuntu(color: darktextcolor),
                                 enabledBorder: OutlineInputBorder(
                                     borderSide:
                                         BorderSide(color: Colors.transparent)),
@@ -182,8 +181,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   color: darkcolor,
                                 ),
                                 hintText: 'Password',
-                                hintStyle:
-                                    GoogleFonts.ubuntu(color: darktextcolor),
+                                // hintStyle:
+                                //     GoogleFonts.ubuntu(color: darktextcolor),
                                 enabledBorder: OutlineInputBorder(
                                     borderSide:
                                         BorderSide(color: Colors.transparent)),
@@ -219,8 +218,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 color: darkcolor,
                                 borderRadius: BorderRadius.circular(40)),
                             child: Center(
-                                child: Helper.text(
-                                    'Signup', 20, 1, lighttextcolor)),
+                                child: Text('Sign Up',
+                                    style: GoogleFonts.ubuntu(
+                                        color: Colors.white,
+                                        fontSize: 20,
+                                        letterSpacing: 0))),
                           ),
                         ),
                         SizedBox(
@@ -233,8 +235,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 MaterialPageRoute(
                                     builder: (b) => SignInScreen()));
                           },
-                          child: Helper.text('Alreay have an account? Signin',
-                              10, 1, darkcolor),
+                          child: Helper.text(
+                              'Already have an account? Sign In', 10, 1),
                         )
                       ],
                     ),
