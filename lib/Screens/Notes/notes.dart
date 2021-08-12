@@ -197,7 +197,8 @@ class _NotesState extends State<Notes> {
                         ),
                         image != null
                             ? Padding(
-                                padding: const EdgeInsets.only(top:20,right: 20.0,bottom: 0),
+                                padding: const EdgeInsets.only(
+                                    top: 20, right: 20.0, bottom: 0),
                                 child: Container(
                                   height:
                                       MediaQuery.of(context).size.height / 2.5,
@@ -220,7 +221,7 @@ class _NotesState extends State<Notes> {
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         Padding(
-                          padding: const EdgeInsets.only(top:0,left: 30.0, right: 30),
+                          padding: const EdgeInsets.only(left: 30.0, right: 30),
                           child: Container(
                             height: 60,
                             decoration: BoxDecoration(
@@ -259,7 +260,6 @@ class _NotesState extends State<Notes> {
                     ),
                   ),
                 ),
-                
               ],
             ),
           ),
