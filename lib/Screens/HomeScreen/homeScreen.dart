@@ -83,7 +83,6 @@ class _HomeScreenState extends State<HomeScreen> {
         onTap: itemtap,
       ),
       body: Container(
-        decoration: BoxDecoration(),
         child: Center(
           child: options.elementAt(_currentindex),
         ),
