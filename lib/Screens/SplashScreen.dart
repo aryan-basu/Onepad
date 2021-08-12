@@ -18,9 +18,11 @@ class _SplashScreenState extends State<SplashScreen> {
     Timer(
         Duration(seconds: 5),
         () => Navigator.pushReplacement(
+
             context,
             MaterialPageRoute(
                 builder: (b) => uid == null ? OnboardScreen() : HomeScreen())));
+
     super.initState();
   }
 
