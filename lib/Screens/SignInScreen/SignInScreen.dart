@@ -8,10 +8,9 @@ import 'package:onepad/Helpers/colorhelper.dart';
 import 'package:onepad/Helpers/helpers.dart';
 import 'package:onepad/Screens/Errors/LoadDialog.dart';
 import 'package:onepad/Screens/HomeScreen/homeScreen.dart';
+import 'package:onepad/Screens/Info/Gettinginfo.dart';
 import 'package:onepad/Screens/SingupScreen/SignupScreen.dart';
-
 import 'package:onepad/Services/const.dart';
-import 'package:onepad/Services/googleSignIn.dart';
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({Key key}) : super(key: key);
@@ -48,6 +47,8 @@ class _SignInScreenState extends State<SignInScreen> {
           UserCredential userCredential =
               await _firebaseAuth.signInWithCredential(authCredential);
           final User user = userCredential.user;
+          print(user.uid);
+          Onepad.sharedPreferences.setString('uid', user.uid);
           Onepad.sharedPreferences.setString('username', user.displayName);
           Onepad.sharedPreferences.setString('email', user.email);
         } catch (e) {
@@ -71,7 +72,9 @@ class _SignInScreenState extends State<SignInScreen> {
             FacebookAuthProvider.credential(_accessToken.token);
 
         _firebaseAuth.signInWithCredential(fbcredential).then((fbuser) {
-          Onepad.sharedPreferences.setString('username', fbuser.user.displayName);
+          Onepad.sharedPreferences.setString('uid', fbuser.user.uid);
+          Onepad.sharedPreferences
+              .setString('username', fbuser.user.displayName);
           Onepad.sharedPreferences.setString('email', fbuser.user.email);
           print("SUZZESS");
 
@@ -88,6 +91,9 @@ class _SignInScreenState extends State<SignInScreen> {
           print(e);
 
           print("ERROR");
+        }).whenComplete(() {
+          Navigator.pushReplacement(
+              context, MaterialPageRoute(builder: (b) => GettingInfo()));
         });
 
         final FacebookAccessToken accessToken = result.accessToken;
@@ -186,7 +192,6 @@ class _SignInScreenState extends State<SignInScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: background,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Container(
@@ -217,7 +222,7 @@ class _SignInScreenState extends State<SignInScreen> {
                                 : "Please provide a valid email";
                           },
                           controller: emailcontroller,
-                          style: GoogleFonts.ubuntu(color: darktextcolor),
+                          // style: GoogleFonts.ubuntu(color: darktextcolor),
                           decoration: InputDecoration(
                               prefixIcon: Icon(
                                 Icons.email,
@@ -225,8 +230,8 @@ class _SignInScreenState extends State<SignInScreen> {
                                 size: 15,
                               ),
                               hintText: 'Email',
-                              hintStyle:
-                                  GoogleFonts.ubuntu(color: darktextcolor),
+                              // hintStyle:
+                              //     GoogleFonts.ubuntu(color: darktextcolor),
                               enabledBorder: OutlineInputBorder(
                                   borderSide:
                                       BorderSide(color: Colors.transparent)),
@@ -256,8 +261,8 @@ class _SignInScreenState extends State<SignInScreen> {
                                 color: darkcolor,
                               ),
                               hintText: 'Password',
-                              hintStyle:
-                                  GoogleFonts.ubuntu(color: darktextcolor),
+                              // hintStyle:
+                              //     GoogleFonts.ubuntu(color: darktextcolor),
                               enabledBorder: OutlineInputBorder(
                                   borderSide:
                                       BorderSide(color: Colors.transparent)),
@@ -293,8 +298,11 @@ class _SignInScreenState extends State<SignInScreen> {
                               color: darkcolor,
                               borderRadius: BorderRadius.circular(40)),
                           child: Center(
-                              child:
-                                  Helper.text('SignIn', 20, 1, lighttextcolor)),
+                              child: Text('Sign In',
+                                  style: GoogleFonts.ubuntu(
+                                      color: Colors.white,
+                                      fontSize: 20,
+                                      letterSpacing: 0))),
                         ),
                       ),
                       SizedBox(
@@ -306,16 +314,29 @@ class _SignInScreenState extends State<SignInScreen> {
                           GestureDetector(
                             onTap: () {
                               _googleSignin().whenComplete(() {
-                                Onepad.sharedPreferences.getString('email') !=
-                                        null
-                                    ? Navigator.pushReplacement(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (b) => HomeScreen()))
-                                    : Navigator.pushReplacement(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (b) => SignInScreen()));
+                                FirebaseFirestore.instance
+                                    .collection('Users')
+                                    .doc(Onepad.sharedPreferences
+                                        .getString('uid'))
+                                    .set({
+                                  "uid":
+                                      Onepad.sharedPreferences.getString('uid'),
+                                  "email": Onepad.sharedPreferences
+                                      .getString('email'),
+                                  "username": Onepad.sharedPreferences
+                                      .getString('username'),
+                                }).whenComplete(() {
+                                  Onepad.sharedPreferences.getString('email') !=
+                                          null
+                                      ? Navigator.pushReplacement(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (b) => HomeScreen()))
+                                      : Navigator.pushReplacement(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (b) => SignInScreen()));
+                                });
                               });
                             },
                             child: Container(
@@ -329,10 +350,29 @@ class _SignInScreenState extends State<SignInScreen> {
                           GestureDetector(
                             onTap: () {
                               _login().whenComplete(() {
-                                Navigator.pushReplacement(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (b) => HomeScreen()));
+                                FirebaseFirestore.instance
+                                    .collection('Users')
+                                    .doc(Onepad.sharedPreferences
+                                        .getString('uid'))
+                                    .set({
+                                  "uid":
+                                      Onepad.sharedPreferences.getString('uid'),
+                                  "email": Onepad.sharedPreferences
+                                      .getString('email'),
+                                  "username": Onepad.sharedPreferences
+                                      .getString('username'),
+                                }).whenComplete(() {
+                                  Onepad.sharedPreferences.getString('email') !=
+                                          null
+                                      ? Navigator.pushReplacement(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (b) => HomeScreen()))
+                                      : Navigator.pushReplacement(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (b) => SignInScreen()));
+                                });
                               });
                             },
                             child: Image.network(
@@ -352,8 +392,7 @@ class _SignInScreenState extends State<SignInScreen> {
                               MaterialPageRoute(
                                   builder: (b) => SignUpScreen()));
                         },
-                        child:
-                            Helper.text('New User ? Signup', 10, 1, darkcolor),
+                        child: Helper.text('New User ? Sign Up', 10, 1),
                       ),
                     ]),
                   ),

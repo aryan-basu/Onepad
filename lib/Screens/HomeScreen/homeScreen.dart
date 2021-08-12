@@ -1,11 +1,13 @@
+import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:onepad/Helpers/colorhelper.dart';
 import 'package:onepad/Helpers/helpers.dart';
+import 'package:onepad/Screens/Account/account.dart';
+import 'package:onepad/Screens/HomeScreen/notes_visible.dart';
 import 'package:onepad/Screens/Notes/notes.dart';
 import 'package:onepad/Services/const.dart';
 
 class HomeScreen extends StatefulWidget {
-  
   const HomeScreen({Key key}) : super(key: key);
 
   @override
@@ -13,12 +15,11 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  String username=Onepad.sharedPreferences.getString('username');
+  final random = Random();
+  String username = Onepad.sharedPreferences.getString('username');
   int _currentindex = 0;
-  List<Widget> options = <Widget>[
-    Helper.text('Home', 20, 0, Colors.black),
-    Helper.text('Account Profile', 20, 0, Colors.black),
-  ];
+  List<Widget> options = <Widget>[NotesVisible(), Account()];
+
   void itemtap(int index) {
     setState(() {
       _currentindex = index;
@@ -28,24 +29,22 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: background,
       appBar: new PreferredSize(
           preferredSize: Size(MediaQuery.of(context).size.width,
               MediaQuery.of(context).size.height),
           child: Container(
-            decoration: BoxDecoration(
-              color: background,
-            ),
+            decoration: BoxDecoration(),
             padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
             child: Row(
               children: [
                 Padding(
                     padding: const EdgeInsets.all(18.0),
                     child: Helper.subtext(
-                       username==null?'Hello ':'Hello '+username+" !",
+                        username == null
+                            ? 'Hello '
+                            : 'Hello ' + username + " !",
                         20,
-                        0,
-                        darktextcolor)),
+                        0)),
                 Spacer(),
                 Container(
                     height: 30,
@@ -63,20 +62,21 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Icon(Icons.add),
       ),
       bottomNavigationBar: BottomNavigationBar(
-        selectedItemColor: darkcolor,
-        unselectedItemColor: darkcolor,
+        selectedItemColor: lightcolor,
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
               icon: Icon(Icons.widgets_outlined),
-              title: Helper.text('', 15, 0, Colors.black)),
+
+              title: Helper.text('', 15, 0)),
           BottomNavigationBarItem(
-              icon: Icon(Icons.person),
-              title: Helper.text('', 15, 0, Colors.black)),
+              icon: Icon(Icons.person), title: Helper.text('', 15, 0)),
+
         ],
         currentIndex: _currentindex,
         onTap: itemtap,
       ),
       body: Container(
+        decoration: BoxDecoration(),
         child: Center(
           child: options.elementAt(_currentindex),
         ),

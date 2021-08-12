@@ -29,9 +29,14 @@ dependencies:
   firebase_core: ^1.3.0
   firebase_storage: ^9.0.0
   flutter_facebook_login: ^3.0.0
+  flutter_read_more_text: ^0.0.1
+  font_awesome_flutter: ^9.1.0
   google_fonts: ^2.1.0
   google_sign_in: ^5.0.4
+  image_picker: ^0.8.2
+  intl: ^0.17.0
   shared_preferences: ^2.0.6
+  toast: ^0.1.5
 
 dev_dependencies:
   flutter_test:
@@ -51,11 +56,13 @@ flutter:
   assets:
     - assets/images/icon.png
     - assets/images/logo.png
-    - assets/images/signup.jpg
+    - assets/images/signup.png
     - assets/images/login.png
     - assets/images/Onboard1.png
     - assets/images/Onboard2.png
     - assets/images/Onboard3.png
+    - assets/images/Splash.gif
+    - assets/images/splash2.gif
   #   - images/a_dot_ham.jpeg
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
