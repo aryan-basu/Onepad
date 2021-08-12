@@ -66,9 +66,11 @@ class _HomeScreenState extends State<HomeScreen> {
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
               icon: Icon(Icons.widgets_outlined),
+
               title: Helper.text('', 15, 0)),
           BottomNavigationBarItem(
               icon: Icon(Icons.person), title: Helper.text('', 15, 0)),
+
         ],
         currentIndex: _currentindex,
         onTap: itemtap,

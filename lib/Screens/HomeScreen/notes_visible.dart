@@ -69,12 +69,11 @@ class _NotesVisibleState extends State<NotesVisible> {
                                         height: 100,
                                         width: 100,
                                         decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(20),
+                                            
                                             image: DecorationImage(
                                                 image: NetworkImage(snapshot
                                                     .data.docs[index]['image']),
-                                                fit: BoxFit.cover)),
+                                                fit: BoxFit.fitHeight)),
                                       ),
                                 SizedBox(
                                   height: 10,
