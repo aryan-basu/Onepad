@@ -9,7 +9,6 @@ import 'package:onepad/Screens/HomeScreen/homeScreen.dart';
 import 'package:onepad/Services/const.dart';
 import 'package:path/path.dart';
 import 'dart:io';
-
 import 'package:toast/toast.dart';
 
 class GettingInfo extends StatefulWidget {
@@ -95,7 +94,7 @@ class _GettingInfoState extends State<GettingInfo> {
                 padding: const EdgeInsets.only(left: 20.0, top: 20),
                 child: Row(
                   children: [
-                    Helper.subtext("Setup your'e profile", 18, 0, darkcolor),
+                    Helper.subtext("Setup your'e profile", 18, 0),
                   ],
                 ),
               ),
@@ -128,8 +127,8 @@ class _GettingInfoState extends State<GettingInfo> {
                                   height: 30,
                                 ),
                                 Container(
-                                    child: Helper.text(
-                                        "Choose a picture", 15, 1, darkcolor)),
+                                    child:
+                                        Helper.text("Choose a picture", 15, 1)),
                                 SizedBox(
                                   height: 40,
                                 ),
@@ -144,8 +143,7 @@ class _GettingInfoState extends State<GettingInfo> {
                                           size: 15,
                                           color: darkcolor,
                                         )),
-                                    Helper.text(
-                                        'From Gallery', 13, 0, darkcolor),
+                                    Helper.text('From Gallery', 13, 0),
                                     Spacer(),
                                     IconButton(
                                         onPressed: () {
@@ -156,8 +154,7 @@ class _GettingInfoState extends State<GettingInfo> {
                                           color: darkcolor,
                                           size: 15,
                                         )),
-                                    Helper.text(
-                                        'From Camera', 13, 0, darkcolor),
+                                    Helper.text('From Camera', 13, 0),
                                     SizedBox(
                                       width: 20,
                                     ),
@@ -194,7 +191,6 @@ class _GettingInfoState extends State<GettingInfo> {
                             child: TextFormField(
                               controller: firstname,
                               style: TextStyle(
-                                color: Colors.black,
                                 fontWeight: FontWeight.w800,
                                 fontSize: 14,
                               ),
@@ -203,7 +199,6 @@ class _GettingInfoState extends State<GettingInfo> {
                               decoration: InputDecoration(
                                   hintText: 'First Name',
                                   hintStyle: TextStyle(
-                                      color: Colors.black,
                                       fontWeight: FontWeight.w800,
                                       fontSize: 14,
                                       letterSpacing: 1),
@@ -229,7 +224,6 @@ class _GettingInfoState extends State<GettingInfo> {
                               child: TextFormField(
                                 controller: lastname,
                                 style: TextStyle(
-                                  color: Colors.black,
                                   fontWeight: FontWeight.w800,
                                   fontSize: 14,
                                 ),
@@ -238,7 +232,6 @@ class _GettingInfoState extends State<GettingInfo> {
                                 decoration: InputDecoration(
                                     hintText: 'Last Name',
                                     hintStyle: TextStyle(
-                                        color: Colors.black,
                                         fontWeight: FontWeight.w800,
                                         fontSize: 14,
                                         letterSpacing: 1),
@@ -269,7 +262,6 @@ class _GettingInfoState extends State<GettingInfo> {
                           child: TextField(
                               cursorColor: Colors.black,
                               style: TextStyle(
-                                color: Colors.black,
                                 fontWeight: FontWeight.w800,
                                 fontSize: 14,
                               ),
@@ -277,7 +269,7 @@ class _GettingInfoState extends State<GettingInfo> {
                               decoration: InputDecoration(
                                   hintText: 'Phone number',
                                   hintStyle: TextStyle(
-                                      color: Colors.black,
+                                      // color: Colors.black,
                                       fontWeight: FontWeight.w800,
                                       fontSize: 14,
                                       letterSpacing: 1),
@@ -303,7 +295,6 @@ class _GettingInfoState extends State<GettingInfo> {
                           child: TextField(
                               cursorColor: Colors.black,
                               style: TextStyle(
-                                color: Colors.black,
                                 fontWeight: FontWeight.w800,
                                 fontSize: 14,
                               ),
@@ -311,7 +302,7 @@ class _GettingInfoState extends State<GettingInfo> {
                               decoration: InputDecoration(
                                   hintText: 'Status',
                                   hintStyle: TextStyle(
-                                      color: Colors.black,
+                                      //color: Colors.black,
                                       fontWeight: FontWeight.w800,
                                       fontSize: 14,
                                       letterSpacing: 1),

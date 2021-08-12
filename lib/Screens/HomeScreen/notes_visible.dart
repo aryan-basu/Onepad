@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:onepad/Helpers/colorhelper.dart';
 import 'package:onepad/Helpers/helpers.dart';
 import 'package:onepad/Screens/DetailScreen/detailScreen.dart';
 import 'package:onepad/Services/const.dart';
@@ -17,7 +16,7 @@ class _NotesVisibleState extends State<NotesVisible> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: background,
+      //backgroundColor: background,
       body: Container(
         height: MediaQuery.of(context).size.height,
         width: 400,
@@ -80,8 +79,8 @@ class _NotesVisibleState extends State<NotesVisible> {
                                 SizedBox(
                                   height: 10,
                                 ),
-                                Helper.text(snapshot.data.docs[index]['title'],
-                                    15, 0, darkcolor),
+                                Helper.text(
+                                    snapshot.data.docs[index]['title'], 15, 0),
                                 Container(
                                   child: Padding(
                                     padding:
@@ -96,8 +95,8 @@ class _NotesVisibleState extends State<NotesVisible> {
                                       snapshot.data.docs[index]
                                                   ['description'] ==
                                               null
-                                          ? Helper.subtext('No description', 20,
-                                              0, Colors.black)
+                                          ? Helper.subtext(
+                                              'No description', 20, 0)
                                           : snapshot.data.docs[index]
                                               ['description'],
                                       maxLines: snapshot.data.docs[index]
