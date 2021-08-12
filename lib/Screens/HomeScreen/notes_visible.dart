@@ -20,6 +20,9 @@ class _NotesVisibleState extends State<NotesVisible> {
       backgroundColor: background,
       body: Column(
         children: [
+          SizedBox(
+            height: 20,
+          ),
           Container(
             height: 40,
             child: StreamBuilder<QuerySnapshot>(
@@ -62,6 +65,9 @@ class _NotesVisibleState extends State<NotesVisible> {
                 }
               },
             ),
+          ),
+          SizedBox(
+            height: 20,
           ),
           Expanded(
             child: Container(
