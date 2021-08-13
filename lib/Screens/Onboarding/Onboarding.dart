@@ -42,14 +42,15 @@ class _OnboardScreenState extends State<OnboardScreen> {
         borderRadius: BorderRadius.all(
           Radius.circular(50),
         ),
-         color: _currentPage==index?Colors.white:Colors.grey,
+        color: _currentPage == index
+            ? Color.fromRGBO(84, 140, 168, 1)
+            : Colors.grey,
         // color: _currentPage == index ? darkcolor : lightcolor,
       ),
       margin: const EdgeInsets.only(right: 5),
       height: 10,
       curve: Curves.easeIn,
       width: _currentPage == index ? 20 : 10,
-     
     );
   }
 
@@ -127,7 +128,8 @@ class _OnboardScreenState extends State<OnboardScreen> {
                                       child: Text(
                                         'Skip',
                                         style: GoogleFonts.ubuntu(
-                                            color: Colors.white,
+                                            color:
+                                                Color.fromRGBO(84, 140, 168, 1),
                                             fontSize: 14,
                                             letterSpacing: 0),
                                       ),
