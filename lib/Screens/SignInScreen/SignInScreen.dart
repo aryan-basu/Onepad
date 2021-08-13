@@ -192,7 +192,6 @@ class _SignInScreenState extends State<SignInScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: background,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Container(
@@ -223,7 +222,7 @@ class _SignInScreenState extends State<SignInScreen> {
                                 : "Please provide a valid email";
                           },
                           controller: emailcontroller,
-                          style: GoogleFonts.ubuntu(color: darktextcolor),
+                          // style: GoogleFonts.ubuntu(color: darktextcolor),
                           decoration: InputDecoration(
                               prefixIcon: Icon(
                                 Icons.email,
@@ -231,8 +230,8 @@ class _SignInScreenState extends State<SignInScreen> {
                                 size: 15,
                               ),
                               hintText: 'Email',
-                              hintStyle:
-                                  GoogleFonts.ubuntu(color: darktextcolor),
+                              // hintStyle:
+                              //     GoogleFonts.ubuntu(color: darktextcolor),
                               enabledBorder: OutlineInputBorder(
                                   borderSide:
                                       BorderSide(color: Colors.transparent)),
@@ -262,8 +261,8 @@ class _SignInScreenState extends State<SignInScreen> {
                                 color: darkcolor,
                               ),
                               hintText: 'Password',
-                              hintStyle:
-                                  GoogleFonts.ubuntu(color: darktextcolor),
+                              // hintStyle:
+                              //     GoogleFonts.ubuntu(color: darktextcolor),
                               enabledBorder: OutlineInputBorder(
                                   borderSide:
                                       BorderSide(color: Colors.transparent)),
@@ -299,8 +298,11 @@ class _SignInScreenState extends State<SignInScreen> {
                               color: darkcolor,
                               borderRadius: BorderRadius.circular(40)),
                           child: Center(
-                              child:
-                                  Helper.text('SignIn', 20, 1, lighttextcolor)),
+                              child: Text('Sign In',
+                                  style: GoogleFonts.ubuntu(
+                                      color: Colors.white,
+                                      fontSize: 20,
+                                      letterSpacing: 0))),
                         ),
                       ),
                       SizedBox(
@@ -390,8 +392,7 @@ class _SignInScreenState extends State<SignInScreen> {
                               MaterialPageRoute(
                                   builder: (b) => SignUpScreen()));
                         },
-                        child:
-                            Helper.text('New User ? Signup', 10, 1, darkcolor),
+                        child: Helper.text('New User ? Sign Up', 10, 1),
                       ),
                     ]),
                   ),

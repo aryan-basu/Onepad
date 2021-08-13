@@ -41,7 +41,7 @@ class _DetailScreenState extends State<DetailScreen> {
         backgroundColor: lightcolor,
         child: Icon(Icons.settings_voice),
       ),
-      backgroundColor: background,
+      //backgroundColor: background,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Container(
@@ -120,7 +120,7 @@ class _DetailScreenState extends State<DetailScreen> {
                               hintText: widget.onepad['title']),
                           style: GoogleFonts.ubuntu(
                               fontSize: 15,
-                              color: Colors.black,
+                              //color: Colors.black,
                               letterSpacing: 0),
                           onChanged: (val) {
                             title = val;
@@ -136,7 +136,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                     hintText: widget.onepad['subtitle']),
                                 style: GoogleFonts.ubuntu(
                                     fontSize: 15,
-                                    color: Colors.black,
+                                    //color: Colors.black,
                                     letterSpacing: 0),
                                 onChanged: (val) {
                                   subtitle = val;
@@ -163,7 +163,7 @@ class _DetailScreenState extends State<DetailScreen> {
                               hintText: widget.onepad['description'],
                               hintStyle: GoogleFonts.ubuntu(
                                   fontSize: 20,
-                                  color: Colors.black,
+                                  //color: Colors.black,
                                   letterSpacing: 0),
                             ),
                           ),

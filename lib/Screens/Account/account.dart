@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:onepad/Helpers/colorhelper.dart';
 
 class Account extends StatefulWidget {
   const Account({Key key}) : super(key: key);
@@ -11,8 +10,6 @@ class Account extends StatefulWidget {
 class _AccountState extends State<Account> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: background,
-    );
+    return Scaffold();
   }
 }
