@@ -32,9 +32,9 @@ class _DetailScreenState extends State<DetailScreen> {
     TextEditingController titlecontroller = TextEditingController();
     TextEditingController subtitlecontroller = TextEditingController();
     TextEditingController descontroller = TextEditingController();
-    String title;
-    String des;
-    String subtitle;
+    String title="";
+    String des="";
+    String subtitle="";
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
@@ -63,24 +63,23 @@ class _DetailScreenState extends State<DetailScreen> {
                       Spacer(),
                       IconButton(
                         onPressed: () {
-                          print(title.toString());
-                          print(subtitle.toString());
-                          print(des.toString());
+                          title.length.toInt()==0?print("Null"):print(title.length);
+                          
                           FirebaseFirestore.instance
                               .collection('Users')
                               .doc(Onepad.sharedPreferences.getString('uid'))
                               .collection('Notes')
                               .doc(widget.onepad['id'])
                               .update({
-                            'title': title.toString() == null
-                                ? widget.onepad['title']
-                                : title.toString(),
-                            'subtitle': subtitle.toString() == null
+                                
+                            'title':
+                                title.length.toInt()==0? widget.onepad['title'] : title,
+                            'subtitle': subtitle.length.toInt()==0
                                 ? widget.onepad['subtitle']
-                                : subtitle.toString(),
-                            'description': des.toString() == null
+                                : subtitle,
+                            'description': des.length.toInt()==0
                                 ? widget.onepad['description']
-                                : des.toString(),
+                                : des,
                             'created':
                                 '${currentDate.day} ${returnMonth(DateTime.now())} ',
                             'time': DateTime.now().millisecondsSinceEpoch,
