@@ -32,13 +32,12 @@ class _DetailScreenState extends State<DetailScreen> {
     TextEditingController titlecontroller = TextEditingController();
     TextEditingController subtitlecontroller = TextEditingController();
     TextEditingController descontroller = TextEditingController();
-    String title="";
-    String des="";
-    String subtitle="";
+    String title = "";
+    String des = "";
+    String subtitle = "";
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
-        backgroundColor: lightcolor,
         child: Icon(Icons.settings_voice),
       ),
       //backgroundColor: background,
@@ -57,27 +56,28 @@ class _DetailScreenState extends State<DetailScreen> {
                               MaterialPageRoute(builder: (b) => HomeScreen()));
                         },
                         icon: Icon(Icons.arrow_back_ios),
-                        color: darkcolor,
                         iconSize: 20,
                       ),
                       Spacer(),
                       IconButton(
                         onPressed: () {
-                          title.length.toInt()==0?print("Null"):print(title.length);
-                          
+                          title.length.toInt() == 0
+                              ? print("Null")
+                              : print(title.length);
+
                           FirebaseFirestore.instance
                               .collection('Users')
                               .doc(Onepad.sharedPreferences.getString('uid'))
                               .collection('Notes')
                               .doc(widget.onepad['id'])
                               .update({
-                                
-                            'title':
-                                title.length.toInt()==0? widget.onepad['title'] : title,
-                            'subtitle': subtitle.length.toInt()==0
+                            'title': title.length.toInt() == 0
+                                ? widget.onepad['title']
+                                : title,
+                            'subtitle': subtitle.length.toInt() == 0
                                 ? widget.onepad['subtitle']
                                 : subtitle,
-                            'description': des.length.toInt()==0
+                            'description': des.length.toInt() == 0
                                 ? widget.onepad['description']
                                 : des,
                             'created':
@@ -115,7 +115,6 @@ class _DetailScreenState extends State<DetailScreen> {
                       children: [
                         TextFormField(
                           controller: titlecontroller,
-                          cursorColor: darktextcolor,
                           decoration: InputDecoration.collapsed(
                               hintText: widget.onepad['title']),
                           style: GoogleFonts.ubuntu(
@@ -131,7 +130,6 @@ class _DetailScreenState extends State<DetailScreen> {
                             padding: const EdgeInsets.only(top: 20.0),
                             child: TextFormField(
                                 controller: subtitlecontroller,
-                                cursorColor: darktextcolor,
                                 decoration: InputDecoration.collapsed(
                                     hintText: widget.onepad['subtitle']),
                                 style: GoogleFonts.ubuntu(
@@ -152,7 +150,6 @@ class _DetailScreenState extends State<DetailScreen> {
                               des = val;
                             },
                             maxLines: 18,
-                            cursorColor: darktextcolor,
                             decoration: InputDecoration(
                               focusedBorder: UnderlineInputBorder(
                                   borderSide:
