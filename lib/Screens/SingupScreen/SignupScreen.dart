@@ -89,7 +89,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   width: MediaQuery.of(context).size.width - 100,
                   decoration: BoxDecoration(
                       image: DecorationImage(
-                          image: AssetImage('assets/images/signup.jpg'))),
+                          image: AssetImage('assets/images/signup.png'))),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(40.0),
@@ -99,7 +99,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       children: [
                         Container(
                           decoration: BoxDecoration(
-                              color: lightcolor.withOpacity(0.2),
                               borderRadius: BorderRadius.circular(40)),
                           child: TextFormField(
                             controller: namecontroller,
@@ -112,7 +111,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               prefixIcon: Icon(
                                 Icons.person,
                                 size: 15,
-                                color: darkcolor,
                               ),
                               hintText: 'Username',
                               // hintStyle:
@@ -131,7 +129,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         ),
                         Container(
                           decoration: BoxDecoration(
-                              color: lightcolor.withOpacity(0.2),
                               borderRadius: BorderRadius.circular(40)),
                           child: TextFormField(
                             validator: (val) {
@@ -146,7 +143,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             decoration: InputDecoration(
                                 prefixIcon: Icon(
                                   Icons.email,
-                                  color: darkcolor,
                                   size: 15,
                                 ),
                                 hintText: 'Email',
@@ -165,7 +161,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         ),
                         Container(
                           decoration: BoxDecoration(
-                              color: lightcolor.withOpacity(0.2),
                               borderRadius: BorderRadius.circular(40)),
                           child: TextFormField(
                             controller: passwordcontroller,
@@ -178,7 +173,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 prefixIcon: Icon(
                                   Icons.lock,
                                   size: 15,
-                                  color: darkcolor,
                                 ),
                                 hintText: 'Password',
                                 // hintStyle:
@@ -198,7 +192,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   icon: passwordvisibility
                                       ? Icon(Icons.visibility)
                                       : Icon(Icons.visibility_off),
-                                  color: darkcolor,
                                   iconSize: 15,
                                 )),
                             obscureText: !passwordvisibility,
@@ -215,7 +208,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             height: 60,
                             width: MediaQuery.of(context).size.width / 2,
                             decoration: BoxDecoration(
-                                color: darkcolor,
                                 borderRadius: BorderRadius.circular(40)),
                             child: Center(
                                 child: Text('Sign Up',

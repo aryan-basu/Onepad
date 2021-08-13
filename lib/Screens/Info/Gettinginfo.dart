@@ -55,9 +55,9 @@ class _GettingInfoState extends State<GettingInfo> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: background,
+     
       floatingActionButton: FloatingActionButton(
-        backgroundColor: darkcolor,
+      
         child: Icon(Icons.arrow_forward_ios_outlined),
         onPressed: () {
           firstname.text.isEmpty &&
@@ -65,7 +65,7 @@ class _GettingInfoState extends State<GettingInfo> {
                   phonenumber.text.isEmpty &&
                   status.text.isEmpty
               ? Toast.show('Do fill the above form', context,
-                  backgroundColor: darkcolor,
+                  
                   duration: Toast.LENGTH_LONG,
                   gravity: Toast.BOTTOM)
               : uploadimage().then((url) {
@@ -141,7 +141,7 @@ class _GettingInfoState extends State<GettingInfo> {
                                         icon: Icon(
                                           Icons.image,
                                           size: 15,
-                                          color: darkcolor,
+                                          
                                         )),
                                     Helper.text('From Gallery', 13, 0),
                                     Spacer(),
@@ -151,7 +151,7 @@ class _GettingInfoState extends State<GettingInfo> {
                                         },
                                         icon: Icon(
                                           FontAwesomeIcons.camera,
-                                          color: darkcolor,
+                                         
                                           size: 15,
                                         )),
                                     Helper.text('From Camera', 13, 0),
@@ -168,7 +168,7 @@ class _GettingInfoState extends State<GettingInfo> {
                     },
                     icon: Icon(FontAwesomeIcons.camera),
                     iconSize: 20,
-                    color: darkcolor,
+                    
                   ),
                 )
               ]),
@@ -185,7 +185,7 @@ class _GettingInfoState extends State<GettingInfo> {
                           width: 200,
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(40),
-                              color: lightcolor.withOpacity(0.2)),
+                             ),
                           child: Padding(
                             padding: const EdgeInsets.only(left: 20.0),
                             child: TextFormField(
@@ -218,7 +218,7 @@ class _GettingInfoState extends State<GettingInfo> {
                           child: Container(
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(40),
-                                color: lightcolor.withOpacity(0.2)),
+                               ),
                             child: Padding(
                               padding: const EdgeInsets.only(left: 20.0),
                               child: TextFormField(
@@ -255,7 +255,7 @@ class _GettingInfoState extends State<GettingInfo> {
                     padding: const EdgeInsets.only(left: 15.0, right: 15),
                     child: Container(
                         decoration: BoxDecoration(
-                            color: lightcolor.withOpacity(0.2),
+                            
                             borderRadius: BorderRadius.circular(40)),
                         child: Padding(
                           padding: const EdgeInsets.only(left: 20.0),
@@ -288,7 +288,7 @@ class _GettingInfoState extends State<GettingInfo> {
                     padding: const EdgeInsets.only(left: 15.0, right: 15),
                     child: Container(
                         decoration: BoxDecoration(
-                            color: lightcolor.withOpacity(0.2),
+                           
                             borderRadius: BorderRadius.circular(40)),
                         child: Padding(
                           padding: const EdgeInsets.only(left: 20.0),

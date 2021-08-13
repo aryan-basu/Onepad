@@ -42,7 +42,7 @@ class _OnboardScreenState extends State<OnboardScreen> {
         borderRadius: BorderRadius.all(
           Radius.circular(50),
         ),
-        color: _currentPage == index ? darkcolor : lightcolor,
+        // color: _currentPage == index ? darkcolor : lightcolor,
       ),
       margin: const EdgeInsets.only(right: 5),
       height: 10,
@@ -134,7 +134,7 @@ class _OnboardScreenState extends State<OnboardScreen> {
                                     width: 100,
                                     decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(40),
-                                        color: darkcolor),
+                                        ),
                                   )),
                             ),
                             Padding(
@@ -184,7 +184,7 @@ class _OnboardScreenState extends State<OnboardScreen> {
                               width: 300,
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(40),
-                                  color: darkcolor),
+                                  ),
                             )),
                       )),
           ],

@@ -17,7 +17,6 @@ class _NotesVisibleState extends State<NotesVisible> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: background,
       body: Column(
         children: [
           SizedBox(
@@ -47,16 +46,16 @@ class _NotesVisibleState extends State<NotesVisible> {
                           child: Container(
                             width: 90,
                             decoration: BoxDecoration(
-                                color: lightcolor.withOpacity(0.8),
+                                color: Color.fromRGBO(84, 140, 168, 1),
                                 borderRadius: BorderRadius.circular(10)),
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Center(
                                 child: Helper.subtext(
-                                    snapshot.data.docs[index]['title'],
-                                    20,
-                                    0,
-                                    ),
+                                  snapshot.data.docs[index]['title'],
+                                  20,
+                                  0,
+                                ),
                               ),
                             ),
                           ),
@@ -138,10 +137,10 @@ class _NotesVisibleState extends State<NotesVisible> {
                                         height: 10,
                                       ),
                                       Helper.text(
-                                          snapshot.data.docs[index]['title'],
-                                          15,
-                                          0,
-                                          ),
+                                        snapshot.data.docs[index]['title'],
+                                        15,
+                                        0,
+                                      ),
                                       Container(
                                         child: Padding(
                                           padding: snapshot.data.docs[index]
@@ -162,7 +161,7 @@ class _NotesVisibleState extends State<NotesVisible> {
                                                     'No description',
                                                     20,
                                                     0,
-                                                    )
+                                                  )
                                                 : snapshot.data.docs[index]
                                                     ['description'],
                                             maxLines: snapshot.data.docs[index]

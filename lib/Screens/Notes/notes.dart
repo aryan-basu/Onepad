@@ -95,7 +95,7 @@ class _NotesState extends State<Notes> {
                               MaterialPageRoute(builder: (b) => HomeScreen()));
                         },
                         icon: Icon(Icons.arrow_back_ios),
-                        color: darkcolor,
+                       
                         iconSize: 20,
                       ),
                       Spacer(),
@@ -104,7 +104,7 @@ class _NotesState extends State<Notes> {
                           titlecontroller.text.isEmpty
                               ? Toast.show("Give title to your note", context,
                                   duration: Toast.LENGTH_LONG,
-                                  backgroundColor: lightcolor,
+                                  
                                   textColor: Colors.white,
                                   gravity: Toast.CENTER)
                               : FirebaseFirestore.instance
@@ -127,7 +127,7 @@ class _NotesState extends State<Notes> {
                                   Toast.show(
                                       "Your note has been created!", context,
                                       duration: Toast.LENGTH_LONG,
-                                      backgroundColor: lightcolor,
+                                    
                                       textColor: Colors.white,
                                       gravity: Toast.BOTTOM);
                                 });
@@ -146,7 +146,7 @@ class _NotesState extends State<Notes> {
                       children: [
                         TextFormField(
                           controller: titlecontroller,
-                          cursorColor: darktextcolor,
+                        
                           decoration: InputDecoration.collapsed(
                             hintText: "Title",
                           ),
@@ -161,7 +161,7 @@ class _NotesState extends State<Notes> {
                             padding: const EdgeInsets.only(top: 20.0),
                             child: TextFormField(
                                 controller: subtitlecontroller,
-                                cursorColor: darktextcolor,
+                                
                                 decoration: InputDecoration.collapsed(
                                   hintText: 'SubTitle',
                                 ),
@@ -181,7 +181,7 @@ class _NotesState extends State<Notes> {
                               des = val;
                             },
                             maxLines: 18,
-                            cursorColor: darktextcolor,
+                            
                             decoration: InputDecoration(
                               focusedBorder: UnderlineInputBorder(
                                   borderSide:
@@ -226,7 +226,7 @@ class _NotesState extends State<Notes> {
                             height: 60,
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(40),
-                                color: lightcolor.withOpacity(0.5)),
+                              ),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
@@ -235,13 +235,13 @@ class _NotesState extends State<Notes> {
                                     gallery();
                                   },
                                   icon: Icon(Icons.image),
-                                  color: darkcolor,
+                                
                                   iconSize: 25,
                                 ),
                                 IconButton(
                                   onPressed: () {},
                                   icon: Icon(Icons.settings_voice),
-                                  color: darkcolor,
+                                  
                                   iconSize: 25,
                                 ),
                                 IconButton(
@@ -249,7 +249,7 @@ class _NotesState extends State<Notes> {
                                     camera();
                                   },
                                   icon: Icon(FontAwesomeIcons.camera),
-                                  color: darkcolor,
+                                  
                                   iconSize: 25,
                                 )
                               ],

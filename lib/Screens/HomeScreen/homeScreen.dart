@@ -55,22 +55,22 @@ class _HomeScreenState extends State<HomeScreen> {
           )),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
+        backgroundColor: Color.fromRGBO(84, 140, 168, 1),
         onPressed: () {
           Navigator.push(context, MaterialPageRoute(builder: (b) => Notes()));
         },
-        backgroundColor: lightcolor,
         child: Icon(Icons.add),
       ),
       bottomNavigationBar: BottomNavigationBar(
-        selectedItemColor: lightcolor,
+        unselectedItemColor: Color.fromRGBO(84, 140, 168, 1),
+        selectedItemColor: Colors.white,
+        backgroundColor: Color.fromRGBO(51, 66, 87, 1),
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
               icon: Icon(Icons.widgets_outlined),
-
               title: Helper.text('', 15, 0)),
           BottomNavigationBarItem(
               icon: Icon(Icons.person), title: Helper.text('', 15, 0)),
-
         ],
         currentIndex: _currentindex,
         onTap: itemtap,

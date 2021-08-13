@@ -37,6 +37,7 @@ class _DetailScreenState extends State<DetailScreen> {
     String subtitle = "";
     return Scaffold(
       floatingActionButton: FloatingActionButton(
+        backgroundColor: Color.fromRGBO(84, 140, 168, 1),
         onPressed: () {},
         child: Icon(Icons.settings_voice),
       ),

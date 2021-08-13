@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
       theme:
           ThemeData(primarySwatch: Colors.blue, brightness: Brightness.light),
       darkTheme: ThemeData(brightness: Brightness.dark),
-      themeMode: ThemeMode.dark,
+      // themeMode: ThemeMode.dark,
       home: SplashScreen(),
     );
   }
