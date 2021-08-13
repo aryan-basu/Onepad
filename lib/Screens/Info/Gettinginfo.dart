@@ -55,19 +55,19 @@ class _GettingInfoState extends State<GettingInfo> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-     
       floatingActionButton: FloatingActionButton(
-      
-        child: Icon(Icons.arrow_forward_ios_outlined),
+        backgroundColor: Color.fromRGBO(51, 66, 87, 1),
+        child: Icon(
+          Icons.arrow_forward_ios_outlined,
+          color: Colors.white,
+        ),
         onPressed: () {
           firstname.text.isEmpty &&
                   lastname.text.isEmpty &&
                   phonenumber.text.isEmpty &&
                   status.text.isEmpty
               ? Toast.show('Do fill the above form', context,
-                  
-                  duration: Toast.LENGTH_LONG,
-                  gravity: Toast.BOTTOM)
+                  duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM)
               : uploadimage().then((url) {
                   FirebaseFirestore.instance
                       .collection('Users')
@@ -141,7 +141,6 @@ class _GettingInfoState extends State<GettingInfo> {
                                         icon: Icon(
                                           Icons.image,
                                           size: 15,
-                                          
                                         )),
                                     Helper.text('From Gallery', 13, 0),
                                     Spacer(),
@@ -151,7 +150,6 @@ class _GettingInfoState extends State<GettingInfo> {
                                         },
                                         icon: Icon(
                                           FontAwesomeIcons.camera,
-                                         
                                           size: 15,
                                         )),
                                     Helper.text('From Camera', 13, 0),
@@ -166,9 +164,11 @@ class _GettingInfoState extends State<GettingInfo> {
                         },
                       );
                     },
-                    icon: Icon(FontAwesomeIcons.camera),
+                    icon: Icon(
+                      FontAwesomeIcons.camera,
+                      color: Color.fromRGBO(84, 140, 168, 1),
+                    ),
                     iconSize: 20,
-                    
                   ),
                 )
               ]),
@@ -184,17 +184,13 @@ class _GettingInfoState extends State<GettingInfo> {
                         child: Container(
                           width: 200,
                           decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(40),
-                             ),
+                            color: Color.fromRGBO(84, 140, 168, 1),
+                            borderRadius: BorderRadius.circular(40),
+                          ),
                           child: Padding(
                             padding: const EdgeInsets.only(left: 20.0),
                             child: TextFormField(
                               controller: firstname,
-                              style: TextStyle(
-                                fontWeight: FontWeight.w800,
-                                fontSize: 14,
-                              ),
-                              cursorColor: Colors.black,
                               keyboardType: TextInputType.emailAddress,
                               decoration: InputDecoration(
                                   hintText: 'First Name',
@@ -217,17 +213,13 @@ class _GettingInfoState extends State<GettingInfo> {
                           padding: const EdgeInsets.only(left: 0, right: 15),
                           child: Container(
                             decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(40),
-                               ),
+                              color: Color.fromRGBO(84, 140, 168, 1),
+                              borderRadius: BorderRadius.circular(40),
+                            ),
                             child: Padding(
                               padding: const EdgeInsets.only(left: 20.0),
                               child: TextFormField(
                                 controller: lastname,
-                                style: TextStyle(
-                                  fontWeight: FontWeight.w800,
-                                  fontSize: 14,
-                                ),
-                                cursorColor: Colors.black,
                                 keyboardType: TextInputType.emailAddress,
                                 decoration: InputDecoration(
                                     hintText: 'Last Name',
@@ -255,16 +247,11 @@ class _GettingInfoState extends State<GettingInfo> {
                     padding: const EdgeInsets.only(left: 15.0, right: 15),
                     child: Container(
                         decoration: BoxDecoration(
-                            
+                            color: Color.fromRGBO(84, 140, 168, 1),
                             borderRadius: BorderRadius.circular(40)),
                         child: Padding(
                           padding: const EdgeInsets.only(left: 20.0),
                           child: TextField(
-                              cursorColor: Colors.black,
-                              style: TextStyle(
-                                fontWeight: FontWeight.w800,
-                                fontSize: 14,
-                              ),
                               controller: phonenumber,
                               decoration: InputDecoration(
                                   hintText: 'Phone number',
@@ -288,16 +275,11 @@ class _GettingInfoState extends State<GettingInfo> {
                     padding: const EdgeInsets.only(left: 15.0, right: 15),
                     child: Container(
                         decoration: BoxDecoration(
-                           
+                            color: Color.fromRGBO(84, 140, 168, 1),
                             borderRadius: BorderRadius.circular(40)),
                         child: Padding(
                           padding: const EdgeInsets.only(left: 20.0),
                           child: TextField(
-                              cursorColor: Colors.black,
-                              style: TextStyle(
-                                fontWeight: FontWeight.w800,
-                                fontSize: 14,
-                              ),
                               controller: status,
                               decoration: InputDecoration(
                                   hintText: 'Status',

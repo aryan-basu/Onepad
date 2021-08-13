@@ -211,7 +211,7 @@ class _SignInScreenState extends State<SignInScreen> {
                     child: Column(children: [
                       Container(
                         decoration: BoxDecoration(
-                            
+                            color: Color.fromRGBO(84, 140, 168, 1),
                             borderRadius: BorderRadius.circular(40)),
                         child: TextFormField(
                           validator: (val) {
@@ -226,7 +226,6 @@ class _SignInScreenState extends State<SignInScreen> {
                           decoration: InputDecoration(
                               prefixIcon: Icon(
                                 Icons.email,
-                              
                                 size: 15,
                               ),
                               hintText: 'Email',
@@ -245,7 +244,7 @@ class _SignInScreenState extends State<SignInScreen> {
                       ),
                       Container(
                         decoration: BoxDecoration(
-                            
+                            color: Color.fromRGBO(84, 140, 168, 1),
                             borderRadius: BorderRadius.circular(40)),
                         child: TextFormField(
                           controller: passwordcontroller,
@@ -258,7 +257,6 @@ class _SignInScreenState extends State<SignInScreen> {
                               prefixIcon: Icon(
                                 Icons.lock,
                                 size: 15,
-                               
                               ),
                               hintText: 'Password',
                               // hintStyle:
@@ -278,7 +276,6 @@ class _SignInScreenState extends State<SignInScreen> {
                                 icon: passwordvisibility
                                     ? Icon(Icons.visibility)
                                     : Icon(Icons.visibility_off),
-                               
                                 iconSize: 15,
                               )),
                           obscureText: !passwordvisibility,
@@ -295,7 +292,7 @@ class _SignInScreenState extends State<SignInScreen> {
                           height: 60,
                           width: MediaQuery.of(context).size.width / 2,
                           decoration: BoxDecoration(
-                             
+                            color: Color.fromRGBO(51, 66, 87, 1),
                               borderRadius: BorderRadius.circular(40)),
                           child: Center(
                               child: Text('Sign In',

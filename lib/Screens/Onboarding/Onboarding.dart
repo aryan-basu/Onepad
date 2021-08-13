@@ -42,12 +42,14 @@ class _OnboardScreenState extends State<OnboardScreen> {
         borderRadius: BorderRadius.all(
           Radius.circular(50),
         ),
+         color: _currentPage==index?Colors.white:Colors.grey,
         // color: _currentPage == index ? darkcolor : lightcolor,
       ),
       margin: const EdgeInsets.only(right: 5),
       height: 10,
       curve: Curves.easeIn,
       width: _currentPage == index ? 20 : 10,
+     
     );
   }
 
@@ -133,8 +135,8 @@ class _OnboardScreenState extends State<OnboardScreen> {
                                     height: 40,
                                     width: 100,
                                     decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(40),
-                                        ),
+                                      borderRadius: BorderRadius.circular(40),
+                                    ),
                                   )),
                             ),
                             Padding(
@@ -157,8 +159,9 @@ class _OnboardScreenState extends State<OnboardScreen> {
                                     height: 50,
                                     width: 100,
                                     decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(20),
-                                        color: Colors.transparent),
+                                      borderRadius: BorderRadius.circular(20),
+                                      color: Color.fromRGBO(84, 140, 168, 1),
+                                    ),
                                   )),
                             ),
                           ],
@@ -183,8 +186,9 @@ class _OnboardScreenState extends State<OnboardScreen> {
                               height: 50,
                               width: 300,
                               decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(40),
-                                  ),
+                                color: Color.fromRGBO(84, 140, 168, 1),
+                                borderRadius: BorderRadius.circular(40),
+                              ),
                             )),
                       )),
           ],

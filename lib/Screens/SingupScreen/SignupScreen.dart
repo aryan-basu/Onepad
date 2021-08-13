@@ -99,6 +99,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       children: [
                         Container(
                           decoration: BoxDecoration(
+                              color: Color.fromRGBO(84, 140, 168, 1),
                               borderRadius: BorderRadius.circular(40)),
                           child: TextFormField(
                             controller: namecontroller,
@@ -129,6 +130,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         ),
                         Container(
                           decoration: BoxDecoration(
+                              color: Color.fromRGBO(84, 140, 168, 1),
                               borderRadius: BorderRadius.circular(40)),
                           child: TextFormField(
                             validator: (val) {
@@ -161,6 +163,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         ),
                         Container(
                           decoration: BoxDecoration(
+                              color: Color.fromRGBO(84, 140, 168, 1),
                               borderRadius: BorderRadius.circular(40)),
                           child: TextFormField(
                             controller: passwordcontroller,
@@ -208,6 +211,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             height: 60,
                             width: MediaQuery.of(context).size.width / 2,
                             decoration: BoxDecoration(
+                                color: Color.fromRGBO(51, 66, 87, 1),
                                 borderRadius: BorderRadius.circular(40)),
                             child: Center(
                                 child: Text('Sign Up',
