@@ -5,7 +5,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
-import 'package:onepad/Helpers/colorhelper.dart';
+
 import 'package:onepad/Helpers/helpers.dart';
 import 'package:onepad/Screens/HomeScreen/homeScreen.dart';
 import 'package:onepad/Services/const.dart';

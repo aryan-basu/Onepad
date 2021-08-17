@@ -3,7 +3,7 @@ import 'package:onepad/Services/const.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:onepad/Helpers/colorhelper.dart';
+
 import 'package:onepad/Screens/HomeScreen/homeScreen.dart';
 
 class DetailScreen extends StatefulWidget {

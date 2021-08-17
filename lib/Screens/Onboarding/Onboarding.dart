@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:onepad/Helpers/colorhelper.dart';
+
 import 'package:onepad/Helpers/helpers.dart';
 import 'package:onepad/Screens/SingupScreen/SignupScreen.dart';
 
@@ -161,7 +161,7 @@ class _OnboardScreenState extends State<OnboardScreen> {
                                     height: 50,
                                     width: 100,
                                     decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(20),
+                                      borderRadius: BorderRadius.circular(40),
                                       color: Color.fromRGBO(84, 140, 168, 1),
                                     ),
                                   )),

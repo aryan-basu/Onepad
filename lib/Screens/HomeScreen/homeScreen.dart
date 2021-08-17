@@ -1,6 +1,6 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
-import 'package:onepad/Helpers/colorhelper.dart';
+
 import 'package:onepad/Helpers/helpers.dart';
 import 'package:onepad/Screens/Account/account.dart';
 import 'package:onepad/Screens/HomeScreen/notes_visible.dart';
@@ -15,8 +15,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final random = Random();
-  String username = Onepad.sharedPreferences.getString('username');
   int _currentindex = 0;
   List<Widget> options = <Widget>[NotesVisible(), Account()];
 
@@ -39,13 +37,17 @@ class _HomeScreenState extends State<HomeScreen> {
               children: [
                 Padding(
                     padding: const EdgeInsets.all(18.0),
-                    child: Helper.subtext(
-                        username == null
-                            ? 'Hello '
-                            : 'Hello ' + username + " !",
-                        20,
-                        0)),
+                    child: Helper.subtext("Welcome to Onepad", 20, 0)),
                 Spacer(),
+                IconButton(
+                    onPressed: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (b) => super.widget));
+                    },
+                    icon: Icon(
+                      Icons.refresh,
+                      color: Color.fromRGBO(84, 140, 168, 1),
+                    )),
                 Container(
                     height: 30,
                     width: 50,
@@ -70,7 +72,14 @@ class _HomeScreenState extends State<HomeScreen> {
               icon: Icon(Icons.widgets_outlined),
               title: Helper.text('', 15, 0)),
           BottomNavigationBarItem(
-              icon: Icon(Icons.person), title: Helper.text('', 15, 0)),
+              icon: IconButton(
+                onPressed: () {
+                  Navigator.push(
+                      context, MaterialPageRoute(builder: (b) => Account()));
+                },
+                icon: Icon(Icons.person),
+              ),
+              title: Helper.text('', 15, 0)),
         ],
         currentIndex: _currentindex,
         onTap: itemtap,
