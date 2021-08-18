@@ -35,8 +35,11 @@ class _AccountState extends State<Account> {
           onPressed: () {
             signOut();
           },
-          backgroundColor: Color.fromRGBO(51, 66, 87, 1),
-          child: Icon(Icons.logout),
+          backgroundColor: Color.fromRGBO(84, 140, 168, 1),
+          child: Icon(
+            Icons.logout,
+            color: Colors.white,
+          ),
         ),
         body: Column(
           children: [
@@ -96,17 +99,14 @@ class _AccountState extends State<Account> {
                                           " " +
                                           snapshot.data.docs[index]['lastname'],
                                       style: GoogleFonts.ubuntu(
-                                          fontSize: 20,
-                                          color: Color.fromRGBO(51, 66, 87, 1)),
+                                          fontSize: 20, color: Colors.white),
                                     ),
                                     Padding(
                                       padding: const EdgeInsets.only(top: 8.0),
                                       child: Text(
                                         snapshot.data.docs[index]['status'],
                                         style: GoogleFonts.ubuntu(
-                                            fontSize: 20,
-                                            color:
-                                                Color.fromRGBO(51, 66, 87, 1)),
+                                            fontSize: 20, color: Colors.white),
                                       ),
                                     ),
                                     Padding(
@@ -115,9 +115,7 @@ class _AccountState extends State<Account> {
                                         snapshot.data.docs[index]
                                             ['phonenumber'],
                                         style: GoogleFonts.ubuntu(
-                                            fontSize: 20,
-                                            color:
-                                                Color.fromRGBO(51, 66, 87, 1)),
+                                            fontSize: 20, color: Colors.white),
                                       ),
                                     ),
                                   ],
@@ -133,9 +131,7 @@ class _AccountState extends State<Account> {
             ListTile(
               title: Text(
                 "App info ",
-                style: GoogleFonts.ubuntu(
-                  color: Color.fromRGBO(51, 66, 87, 1),
-                ),
+                style: GoogleFonts.ubuntu(),
               ),
               leading: Icon(Icons.info),
               trailing: IconButton(
@@ -149,9 +145,7 @@ class _AccountState extends State<Account> {
             ListTile(
               title: Text(
                 "Your'e notes",
-                style: GoogleFonts.ubuntu(
-                  color: Color.fromRGBO(51, 66, 87, 1),
-                ),
+                style: GoogleFonts.ubuntu(),
               ),
               leading: Icon(Icons.info),
               trailing: IconButton(
@@ -162,9 +156,7 @@ class _AccountState extends State<Account> {
             ListTile(
               title: Text(
                 "Terms and conditions ",
-                style: GoogleFonts.ubuntu(
-                  color: Color.fromRGBO(51, 66, 87, 1),
-                ),
+                style: GoogleFonts.ubuntu(),
               ),
               leading: Icon(Icons.info),
               trailing: IconButton(
