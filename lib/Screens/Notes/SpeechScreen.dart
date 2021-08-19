@@ -33,7 +33,7 @@ class _SpeechScreenState extends State<SpeechScreen> {
 
   PickedFile image;
   String imageurl = "";
-
+  String subtitle;
   void gallery() async {
     final _userimage =
         await ImagePicker().pickImage(source: ImageSource.gallery);
@@ -115,7 +115,7 @@ class _SpeechScreenState extends State<SpeechScreen> {
                                 .set({
                                 'title': title,
                                 'description': _text,
-                                'subtitle': subtitlecontroller.text,
+                                'subtitle': subtitle,
                                 'created':
                                     '${currentDate.day} ${returnMonth(DateTime.now())} ',
                                 'time': DateTime.now().millisecondsSinceEpoch,
@@ -175,7 +175,7 @@ class _SpeechScreenState extends State<SpeechScreen> {
                       ),
                       style: GoogleFonts.ubuntu(fontSize: 18, letterSpacing: 0),
                       onChanged: (val) {
-                        title = val;
+                        subtitle = val;
                       }),
                 ),
               ),
