@@ -14,6 +14,7 @@ class NotesVisible extends StatefulWidget {
 }
 
 class _NotesVisibleState extends State<NotesVisible> {
+  bool isStarred = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -174,6 +175,25 @@ class _NotesVisibleState extends State<NotesVisible> {
                                                 letterSpacing: 0, fontSize: 13),
                                           ),
                                         ),
+                                      ),
+                                      Spacer(),
+                                      Align(
+                                        child: IconButton(
+                                          onPressed: () {
+                                            isStarred
+                                                ? isStarred = false
+                                                : isStarred = true;
+                                          },
+                                          icon: Icon(
+                                              isStarred
+                                                  ? Icons.star
+                                                  : Icons.star_border_outlined,
+                                              color: isStarred
+                                                  ? Colors.yellowAccent
+                                                  : null),
+                                          iconSize: 20,
+                                        ),
+                                        alignment: Alignment.bottomRight,
                                       ),
                                     ],
                                   ),

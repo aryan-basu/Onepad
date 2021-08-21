@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 
+import 'package:onepad/Screens/StarredNotes.dart';
 import 'package:onepad/Helpers/helpers.dart';
 import 'package:onepad/Screens/Account/account.dart';
 import 'package:onepad/Screens/HomeScreen/notes_visible.dart';
@@ -55,7 +56,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ],
             ),
           )),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       floatingActionButton: FloatingActionButton(
         backgroundColor: Color.fromRGBO(84, 140, 168, 1),
         onPressed: () {
@@ -70,6 +71,15 @@ class _HomeScreenState extends State<HomeScreen> {
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
               icon: Icon(Icons.widgets_outlined),
+              title: Helper.text('', 15, 0)),
+          BottomNavigationBarItem(
+              icon: IconButton(
+                onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (b) => StarredNotes()));
+                },
+                icon: Icon(Icons.star),
+              ),
               title: Helper.text('', 15, 0)),
           BottomNavigationBarItem(
               icon: IconButton(

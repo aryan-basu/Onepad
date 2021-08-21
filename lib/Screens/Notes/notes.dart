@@ -6,13 +6,12 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:onepad/Helpers/helpers.dart';
+import 'package:onepad/Screens/DetailScreen/detailScreen.dart';
 import 'package:onepad/Screens/HomeScreen/homeScreen.dart';
 import 'package:onepad/Services/const.dart';
 import 'package:toast/toast.dart';
 import 'package:path/path.dart';
 import 'dart:io';
-
-import 'SpeechScreen.dart';
 
 class Notes extends StatefulWidget {
   @override
@@ -234,12 +233,7 @@ class _NotesState extends State<Notes> {
                                   iconSize: 25,
                                 ),
                                 IconButton(
-                                  onPressed: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (b) => SpeechScreen()));
-                                  },
+                                  onPressed: () {},
                                   icon: Icon(Icons.settings_voice),
                                   iconSize: 25,
                                 ),

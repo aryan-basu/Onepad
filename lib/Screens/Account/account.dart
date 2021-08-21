@@ -144,7 +144,7 @@ class _AccountState extends State<Account> {
             ),
             ListTile(
               title: Text(
-                "Your'e notes",
+                "Your notes",
                 style: GoogleFonts.ubuntu(),
               ),
               leading: Icon(Icons.info),
