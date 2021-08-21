@@ -70,7 +70,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                 "subtitile": widget.onepad['subtitle'],
                                 "created": widget.onepad['created'],
                               }).whenComplete(() {
-                                Toast.show("Starred your'e notes 💥", context,
+                                Toast.show("Starred your notes 💥", context,
                                     duration: Toast.LENGTH_LONG,
                                     gravity: Toast.CENTER);
                               });

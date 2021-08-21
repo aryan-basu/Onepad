@@ -120,9 +120,15 @@ class _HomeScreenState extends State<HomeScreen> {
                                       height: 20,
                                     ),
                                     Text(
-                                      snapshot.data.docs[index]['firstname'] +
-                                          " " +
-                                          snapshot.data.docs[index]['lastname'],
+                                      snapshot.data.docs[index]['firstname']
+                                              .empty()
+                                          ? snapshot.data.docs[index]
+                                              ['Username']
+                                          : snapshot.data.docs[index]
+                                                  ['firstname'] +
+                                              " " +
+                                              snapshot.data.docs[index]
+                                                  ['lastname'],
                                       style: GoogleFonts.ubuntu(fontSize: 18),
                                     ),
                                     SizedBox(
