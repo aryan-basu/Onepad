@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:onepad/Helpers/helpers.dart';
 import 'package:onepad/Screens/DetailScreen/detailScreen.dart';
 import 'package:onepad/Services/const.dart';
+import 'package:toast/toast.dart';
 
 class NotesVisible extends StatefulWidget {
   const NotesVisible({Key key}) : super(key: key);
@@ -109,94 +110,84 @@ class _NotesVisibleState extends State<NotesVisible> {
                                                     snapshot.data.docs[index],
                                               )));
                                 },
-                                child: Container(
-                                  height: 300,
-                                  width: 300,
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(20),
-                                      color: Colors.blue.withOpacity(0.1)),
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      SizedBox(
-                                        height: 5,
-                                      ),
-                                      snapshot.data.docs[index]['image'] == ""
-                                          ? SizedBox()
-                                          : Container(
-                                              height: 100,
-                                              width: 100,
-                                              decoration: BoxDecoration(
-                                                  image: DecorationImage(
-                                                      image: NetworkImage(
-                                                          snapshot.data
-                                                                  .docs[index]
-                                                              ['image']),
-                                                      fit: BoxFit.fitHeight)),
-                                            ),
-                                      SizedBox(
-                                        height: 10,
-                                      ),
-                                      Helper.text(
-                                        snapshot.data.docs[index]['title'],
-                                        15,
-                                        0,
-                                      ),
-                                      Container(
-                                        child: Padding(
-                                          padding: snapshot.data.docs[index]
-                                                      ['image'] ==
-                                                  ""
-                                              ? const EdgeInsets.only(
-                                                  top: 5,
-                                                  left: 20,
-                                                  right: 20,
-                                                  bottom: 10)
-                                              : const EdgeInsets.only(
-                                                  left: 10.0),
-                                          child: Text(
-                                            snapshot.data.docs[index]
-                                                        ['description'] ==
-                                                    null
-                                                ? Helper.subtext(
-                                                    'No description',
-                                                    20,
-                                                    0,
-                                                  )
-                                                : snapshot.data.docs[index]
-                                                    ['description'],
-                                            maxLines: snapshot.data.docs[index]
-                                                        ['image'] ==
-                                                    ""
-                                                ? 7
-                                                : 1,
-                                            overflow: TextOverflow.ellipsis,
-                                            style: GoogleFonts.ubuntu(
-                                                letterSpacing: 0, fontSize: 13),
+                                child: Stack(
+                                  children: [
+                                    Container(
+                                      height: 300,
+                                      width: 300,
+                                      decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(20),
+                                          color: Colors.blue.withOpacity(0.1)),
+                                      child: Column(
+                                        children: [
+                                          SizedBox(
+                                            height: 10,
                                           ),
-                                        ),
+                                          snapshot.data.docs[index]['image'] ==
+                                                  ""
+                                              ? SizedBox()
+                                              : Container(
+                                                  height: 100,
+                                                  width: 100,
+                                                  decoration: BoxDecoration(
+                                                      image: DecorationImage(
+                                                          image: NetworkImage(
+                                                              snapshot.data
+                                                                          .docs[
+                                                                      index]
+                                                                  ['image']),
+                                                          fit: BoxFit
+                                                              .fitHeight)),
+                                                ),
+                                          SizedBox(
+                                            height: 10,
+                                          ),
+                                          Helper.text(
+                                            snapshot.data.docs[index]['title'],
+                                            15,
+                                            0,
+                                          ),
+                                          Container(
+                                            child: Padding(
+                                              padding: snapshot.data.docs[index]
+                                                          ['image'] ==
+                                                      ""
+                                                  ? const EdgeInsets.only(
+                                                      top: 5,
+                                                      left: 20,
+                                                      right: 20,
+                                                      bottom: 10)
+                                                  : const EdgeInsets.only(
+                                                      left: 10.0),
+                                              child: Text(
+                                                snapshot.data.docs[index]
+                                                            ['description'] ==
+                                                        null
+                                                    ? Helper.subtext(
+                                                        'No description',
+                                                        20,
+                                                        0,
+                                                      )
+                                                    : snapshot.data.docs[index]
+                                                        ['description'],
+                                                maxLines:
+                                                    snapshot.data.docs[index]
+                                                                ['image'] ==
+                                                            ""
+                                                        ? 7
+                                                        : 1,
+                                                overflow: TextOverflow.ellipsis,
+                                                style: GoogleFonts.ubuntu(
+                                                    letterSpacing: 0,
+                                                    fontSize: 13),
+                                              ),
+                                            ),
+                                          ),
+                                        ],
                                       ),
-                                      Spacer(),
-                                      Align(
-                                        child: IconButton(
-                                          onPressed: () {
-                                            isStarred
-                                                ? isStarred = false
-                                                : isStarred = true;
-                                          },
-                                          icon: Icon(
-                                              isStarred
-                                                  ? Icons.star
-                                                  : Icons.star_border_outlined,
-                                              color: isStarred
-                                                  ? Colors.yellowAccent
-                                                  : null),
-                                          iconSize: 20,
-                                        ),
-                                        alignment: Alignment.bottomRight,
-                                      ),
-                                    ],
-                                  ),
+                                    ),
+                                  ],
                                 ),
                               );
                             }),

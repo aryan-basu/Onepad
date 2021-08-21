@@ -8,6 +8,7 @@ import 'package:intl/intl.dart';
 import 'package:onepad/Helpers/helpers.dart';
 import 'package:onepad/Screens/DetailScreen/detailScreen.dart';
 import 'package:onepad/Screens/HomeScreen/homeScreen.dart';
+import 'package:onepad/Screens/Notes/SpeechScreen.dart';
 import 'package:onepad/Services/const.dart';
 import 'package:toast/toast.dart';
 import 'package:path/path.dart';
@@ -233,7 +234,12 @@ class _NotesState extends State<Notes> {
                                   iconSize: 25,
                                 ),
                                 IconButton(
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (b) => SpeechScreen()));
+                                  },
                                   icon: Icon(Icons.settings_voice),
                                   iconSize: 25,
                                 ),

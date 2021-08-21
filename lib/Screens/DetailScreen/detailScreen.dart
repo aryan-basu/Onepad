@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'package:onepad/Screens/HomeScreen/homeScreen.dart';
+import 'package:toast/toast.dart';
 
 class DetailScreen extends StatefulWidget {
   final QueryDocumentSnapshot onepad;
@@ -54,6 +55,31 @@ class _DetailScreenState extends State<DetailScreen> {
                         iconSize: 20,
                       ),
                       Spacer(),
+                      Positioned(
+                        child: IconButton(
+                            onPressed: () {
+                              FirebaseFirestore.instance
+                                  .collection("Users")
+                                  .doc(
+                                      Onepad.sharedPreferences.getString("uid"))
+                                  .collection("Starred")
+                                  .add({
+                                "title": widget.onepad['title'],
+                                "image": widget.onepad['image'],
+                                "description": widget.onepad['description'],
+                                "subtitile": widget.onepad['subtitle'],
+                                "created": widget.onepad['created'],
+                              }).whenComplete(() {
+                                Toast.show("Starred your'e notes 💥", context,
+                                    duration: Toast.LENGTH_LONG,
+                                    gravity: Toast.CENTER);
+                              });
+                            },
+                            icon: Icon(
+                              Icons.star,
+                              color: Colors.red,
+                            )),
+                      ),
                       IconButton(
                         onPressed: () {
                           title.length.toInt() == 0

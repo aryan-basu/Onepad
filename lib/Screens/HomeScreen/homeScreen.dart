@@ -17,7 +17,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int _currentindex = 0;
-  List<Widget> options = <Widget>[NotesVisible(), Account()];
+  List<Widget> options = <Widget>[NotesVisible(), StarredNotes()];
 
   void itemtap(int index) {
     setState(() {
@@ -56,7 +56,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ],
             ),
           )),
-      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
         backgroundColor: Color.fromRGBO(84, 140, 168, 1),
         onPressed: () {
@@ -73,23 +73,16 @@ class _HomeScreenState extends State<HomeScreen> {
               icon: Icon(Icons.widgets_outlined),
               title: Helper.text('', 15, 0)),
           BottomNavigationBarItem(
-              icon: IconButton(
-                onPressed: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (b) => StarredNotes()));
-                },
-                icon: Icon(Icons.star),
-              ),
-              title: Helper.text('', 15, 0)),
-          BottomNavigationBarItem(
-              icon: IconButton(
-                onPressed: () {
-                  Navigator.push(
-                      context, MaterialPageRoute(builder: (b) => Account()));
-                },
-                icon: Icon(Icons.person),
-              ),
-              title: Helper.text('', 15, 0)),
+              icon: Icon(Icons.star), title: Helper.text('', 15, 0)),
+          // BottomNavigationBarItem(
+          //     icon: IconButton(
+          //       onPressed: () {
+          //         Navigator.push(
+          //             context, MaterialPageRoute(builder: (b) => Account()));
+          //       },
+          //       icon: Icon(Icons.person),
+          //     ),
+          //     title: Helper.text('', 15, 0)),
         ],
         currentIndex: _currentindex,
         onTap: itemtap,
