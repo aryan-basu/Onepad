@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:onepad/Screens/Account/account.dart';
+import 'package:onepad/Screens/HomeScreen/homeScreen.dart';
 
 class AppInfo extends StatelessWidget {
   const AppInfo({Key key}) : super(key: key);
@@ -10,7 +10,8 @@ class AppInfo extends StatelessWidget {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.push(context, MaterialPageRoute(builder: (b) => Account()));
+          Navigator.push(
+              context, MaterialPageRoute(builder: (b) => HomeScreen()));
         },
         backgroundColor: Color.fromRGBO(84, 140, 168, 1),
         child: Icon(
