@@ -1,16 +1,12 @@
-import 'dart:math';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import 'package:onepad/Screens/StarredNotes.dart';
 import 'package:onepad/Helpers/helpers.dart';
-import 'package:onepad/Screens/Account/account.dart';
 import 'package:onepad/Screens/HomeScreen/notes_visible.dart';
 import 'package:onepad/Screens/Notes/notes.dart';
 import 'package:onepad/Services/const.dart';
-
 import '../AppInfo.dart';
 import '../SplashScreen.dart';
 
@@ -120,15 +116,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                       height: 20,
                                     ),
                                     Text(
-                                      snapshot.data.docs[index]['firstname']
-                                              .empty()
-                                          ? snapshot.data.docs[index]
-                                              ['Username']
-                                          : snapshot.data.docs[index]
-                                                  ['firstname'] +
-                                              " " +
-                                              snapshot.data.docs[index]
-                                                  ['lastname'],
+                                      snapshot.data.docs[index]['firstname'] +
+                                          " " +
+                                          snapshot.data.docs[index]['lastname'],
                                       style: GoogleFonts.ubuntu(fontSize: 18),
                                     ),
                                     SizedBox(

@@ -292,7 +292,7 @@ class _SignInScreenState extends State<SignInScreen> {
                           height: 60,
                           width: MediaQuery.of(context).size.width / 2,
                           decoration: BoxDecoration(
-                            color: Color.fromRGBO(51, 66, 87, 1),
+                              color: Color.fromRGBO(51, 66, 87, 1),
                               borderRadius: BorderRadius.circular(40)),
                           child: Center(
                               child: Text('Sign In',
@@ -328,7 +328,7 @@ class _SignInScreenState extends State<SignInScreen> {
                                       ? Navigator.pushReplacement(
                                           context,
                                           MaterialPageRoute(
-                                              builder: (b) => HomeScreen()))
+                                              builder: (b) => GettingInfo()))
                                       : Navigator.pushReplacement(
                                           context,
                                           MaterialPageRoute(
