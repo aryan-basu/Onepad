@@ -23,7 +23,8 @@ The user details are  stored in Firebase database.
 - Create your'e notes via Image,Text,Speech to Text.
 - Star you're favourite note.
 - Review the old notes and update changes.
-- System default theme 
+- Delete you're old note.
+- System default theme.
 
 ## Stacks used
 * <a href="https://flutter.dev" target="_blank"> <img src="https://www.vectorlogo.zone/logos/flutterio/flutterio-icon.svg" alt="flutter" width="20" height="20"/> </a> Flutter
