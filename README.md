@@ -21,7 +21,7 @@ The user details are  stored in Firebase database.
 ## Features 
 - Signin / Signup - Email,Password,Google Signin,Facebook Signin (Sync).
 - Create your'e notes via Image,Text,Speech to Text.
-- Starr you're favourite note.
+- Star you're favourite note.
 - Review the old notes and update changes.
 
 ## Stacks used
