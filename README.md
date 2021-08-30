@@ -9,7 +9,7 @@ The user details are  stored in Firebase database.
 ## Way to clone and build the app:
 - Clone repo
 
-		git clone https://github.com/msramesh2k1/classroommeet.git
+		git clone https://github.com/aryan-basu/Onepad.git
 
 - Get packages
 
