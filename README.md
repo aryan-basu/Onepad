@@ -17,6 +17,12 @@ The user details are  stored in Firebase database.
 - Build app
 
 		flutter run
+		
+## Features 
+- Signin / Signup - Email,Password,Google Signin,Facebook Signin (Sync).
+- Create your'e notes via Image,Text,Speech to Text.
+- Starr you're favourite note.
+- Review the old notes and update changes.
 
 ## Stacks used
 * <a href="https://flutter.dev" target="_blank"> <img src="https://www.vectorlogo.zone/logos/flutterio/flutterio-icon.svg" alt="flutter" width="20" height="20"/> </a> Flutter
