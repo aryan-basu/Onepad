@@ -1,26 +1,32 @@
 # Onepad
 
-
-`An app for writing notes in text or voice format which can be easily accessible by user anywhere with their account. Also, it has backup feature so that user can easily edit or review their recent notes.`
+An app for writing notes in text or voice format which can be easily accessible by user anywhere with their account. Also, it has backup feature so that user can easily edit or review their recent notes.
 
 Additional they can review the notes and edit in future,System default for theme is also provided .
-The user details are  stored in Firebase database .
-
-### Flutter - Google Framework UI kit, Dart - Programming language, Firebase - Backend
+The user details are  stored in Firebase database.
 
 
-A new Flutter project.
+## Way to clone and build the app:
+- Clone repo
 
-## Getting Started
+		git clone https://github.com/msramesh2k1/classroommeet.git
 
-This project is a starting point for a Flutter application.
+- Get packages
 
-A few resources to get you started if this is your first Flutter project:
+		flutter pub get
+- Build app
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+		flutter run
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Stacks used
+* <a href="https://flutter.dev" target="_blank"> <img src="https://www.vectorlogo.zone/logos/flutterio/flutterio-icon.svg" alt="flutter" width="20" height="20"/> </a> Flutter
+* <a href="https://dart.dev" target="_blank"> <img src="https://www.vectorlogo.zone/logos/dartlang/dartlang-icon.svg" alt="dart" width="20" height="20"/> </a> Dart
+* <a href="https://firebase.google.com/" target="_blank"> <img src="https://www.vectorlogo.zone/logos/firebase/firebase-icon.svg" alt="firebase" width="20" height="20"/> </a> Firebase Backend
+
+
+## Platform
+ <h3> <a href="https://flutter.dev" target="_blank"> <img src="https://i.pinimg.com/originals/00/f4/05/00f40564d281eee8dbb931024b8e6975.png" alt="flutter" width="20" height="20"/> </a> Vs code </h3>
+
+
+
 
