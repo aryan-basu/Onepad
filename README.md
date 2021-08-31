@@ -1,8 +1,9 @@
 # Onepad
 
-An app for writing notes in text or voice format which can be easily accessible by user anywhere with their account. Also, it has backup feature so that user can easily edit or review their recent notes.
+An app for writing notes in text or voice format which can be easily accessible by the users anywhere with their account. Also, it has backup feature so that users can easily edit or review their recent notes.
 
-Additional they can review the notes and edit in future,System default for theme is also provided .
+Additionally, they can review the notes and edit them in future. 
+System default for theme is also provided .
 The user details are  stored in Firebase database.
 
 ## Mockup
@@ -23,11 +24,11 @@ The user details are  stored in Firebase database.
 		flutter run
 		
 ## Features 
-- Signin / Signup - Email,Password,Google Signin,Facebook Signin (Sync).
-- Create your'e notes via Image,Text,Speech to Text.
-- Star you're favourite note.
-- Review the old notes and update changes.
-- Delete you're old note.
+- Sign In / Sign Up - Email,Password, Google Sign In, Facebook Sign In(Sync).
+- Add images/text to the notes or use speech to text feature.
+- Star the important notes.
+- Review the older notes and update changes.
+- Delete old notes.
 - System default theme.
 
 ## Stacks used
