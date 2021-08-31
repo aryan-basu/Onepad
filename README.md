@@ -8,7 +8,7 @@ The user details are  stored in Firebase database.
 
 ## Mockup
 
-![banner](https://user-images.githubusercontent.com/54928117/131436658-ac056d5f-4b0c-46c9-a121-6408885fff1a.jpeg)
+![banner](https://github.com/aryan-basu/Onepad/commit/e178378d350929ca8c1bd7163cbb1cf648d348ed?short_path=77f93c5#diff-77f93c5465c70fdcc66739cc73e0413a1cb6ba360a6c8888c1a1d4cd5e763cb3)
 
 
 ## Way to clone and build the app:
