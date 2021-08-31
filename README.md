@@ -2,7 +2,6 @@
 
 An app for writing notes in text or voice format which can be easily accessible by the users anywhere with their account. Also, it has backup feature so that users can easily edit or review their recent notes.
 
-
 Additionally, they can review the notes and edit them in future. 
 System default for theme is also provided .
 The user details are  stored in Firebase database.
@@ -40,7 +39,6 @@ The user details are  stored in Firebase database.
 
 ## Platform
  <h3> <a href="https://flutter.dev" target="_blank"> <img src="https://i.pinimg.com/originals/00/f4/05/00f40564d281eee8dbb931024b8e6975.png" alt="flutter" width="20" height="20"/> </a> Vs code </h3>
-
 
 
 
