@@ -2,6 +2,7 @@
 
 An app for writing notes in text or voice format which can be easily accessible by the users anywhere with their account. Also, it has backup feature so that users can easily edit or review their recent notes.
 
+
 Additionally, they can review the notes and edit them in future. 
 System default for theme is also provided .
 The user details are  stored in Firebase database.
