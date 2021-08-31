@@ -5,6 +5,10 @@ An app for writing notes in text or voice format which can be easily accessible 
 Additional they can review the notes and edit in future,System default for theme is also provided .
 The user details are  stored in Firebase database.
 
+## Mockup
+
+![banner](https://user-images.githubusercontent.com/54928117/131436658-ac056d5f-4b0c-46c9-a121-6408885fff1a.jpeg)
+
 
 ## Way to clone and build the app:
 - Clone repo
